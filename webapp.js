@@ -33,7 +33,7 @@ if(process.env.DISCORD_TOKEN) {
 
 // Homepage route
 app.get("/", (request, result) => {
-    result.sendFile(path.join(process.cwd(), "public", "index.html"));
+    result.sendFile("index.html", { root: "./public" });
 });
 
 /* ---------------- GITHUB API ---------------- */
