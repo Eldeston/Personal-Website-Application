@@ -1,13 +1,13 @@
-const express = require("express");
-const app = express()
-const port = 3000;
+import dotenv from "dotenv";
+import express from "express";
+import { Octokit } from "@octokit/rest";
+import { Client, GatewayIntentBits } from "discord.js";
 
 // For storing tokens
-require('dotenv').config();
-// For Github REST API
-const { Octokit } = require("@octokit/rest");
-// For Discord API
-const { Client, GatewayIntentBits } = require('discord.js');
+dotenv.config();
+
+const port = 3000;
+const app = express();
 
 // Login through provided tokens
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
