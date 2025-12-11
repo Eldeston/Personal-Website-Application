@@ -1,3 +1,4 @@
+import path from "path";
 import dotenv from "dotenv";
 import express from "express";
 import { Octokit } from "@octokit/rest";
@@ -30,8 +31,10 @@ if(process.env.DISCORD_TOKEN) {
     console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
 }
 
-// Homepage...?
-app.get("/");
+// Homepage route
+app.get("/", (request, result) => {
+    result.sendFile(path.join(process.cwd(), "public", "index.html"));
+});
 
 /* ---------------- GITHUB API ---------------- */
 
@@ -105,12 +108,8 @@ app.get("/api/discord", async (request, result) => {
 // app.use(express.static("public"));
 
 // Starts server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-})
-
 if(process.env.NODE_ENV !== "production") {
-  app.listen(3000, () => console.log("Local server running"));
+  app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 }
 
 export default app;
