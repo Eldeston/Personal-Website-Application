@@ -1,0 +1,9 @@
+/* This ensures the element can fill the entire screen */
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+canvas{
+  display: block;
+}

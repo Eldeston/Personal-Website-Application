@@ -1,0 +1,278 @@
+/* ---------------- VARIABLES GOES HERE ---------------- */
+/* ---------------- IMPORT GOES HERE ---------------- */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+/* ---------------- MIXIN GOES HERE ---------------- */
+/* ---------------- ANIMATION GOES HERE ---------------- */
+/* Smoothes the blinking cursor */
+@keyframes alphaAnim {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+/* ---------------- LAYOUT GOES HERE ---------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  font-family: "JetBrains Mono";
+  color: white;
+  background-color: black;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.25em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+}
+
+header, main, footer {
+  box-sizing: border-box;
+  width: min(100%, 1024px);
+  margin: 16px 0;
+}
+
+header {
+  display: flex;
+  place-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 8;
+}
+header a {
+  display: contents;
+}
+header nav {
+  place-content: center;
+}
+
+main section {
+  display: flex;
+  place-content: space-around;
+  flex-direction: column;
+  place-items: center;
+  padding: 128px 0;
+}
+main section #heroHeader {
+  text-align: center;
+}
+main #about #github-stats {
+  display: flex;
+  place-content: space-between;
+}
+main #about #discord-stats {
+  display: flex;
+  place-content: space-between;
+}
+main #work #iFrameContainer {
+  display: flex;
+  place-content: center;
+}
+main #work #iFrameContainer iFrame {
+  aspect-ratio: 16/9;
+  width: 50%;
+}
+
+footer section {
+  display: flex;
+  flex-direction: column;
+  place-content: space-between;
+}
+
+.griddy {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto auto;
+  place-items: center;
+  gap: 16px;
+}
+
+.iconDisplay {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+.iconDisplay .iconDisplayHeader {
+  text-align: center;
+}
+
+.fillWidth {
+  width: 100%;
+}
+
+.iconBig {
+  width: 150px;
+}
+
+.iconMedium {
+  width: 125px;
+}
+
+.iconSmall {
+  width: 100px;
+}
+
+.iconTiny {
+  width: 75px;
+}
+
+#githubPfp {
+  border-radius: 100%;
+}
+
+#sketchP5 {
+  /* For some reason, a lot of the elements have top set for them */
+  top: 0;
+  /* Ensures the full screen is utilized by p5.js */
+  width: 100vw;
+  height: 100vh;
+  /* Keeps background behind all the elements since it's sticky */
+  z-index: -1;
+  /* Keep background sticky */
+  position: fixed;
+  /* Remove the default border used by iframe */
+  border: none;
+}
+
+/* ---------------- STYLING GOES HERE ---------------- */
+.cursorBlink {
+  animation: alphaAnim 1s infinite;
+}
+
+header {
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.125) inset, -2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 2px 0 rgba(255, 255, 255, 0.25) inset, 0 -2px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(64, 64, 64, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0;
+}
+
+main article {
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.125) inset, -2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 2px 0 rgba(255, 255, 255, 0.25) inset, 0 -2px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(64, 64, 64, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 32px;
+  margin: 16px 0;
+}
+
+#github-stats, #discord-stats {
+  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.125) inset, 2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -2px 0 rgba(255, 255, 255, 0.25) inset, 0 2px 0 rgba(0, 0, 0, 0.25) inset;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0;
+}
+
+footer {
+  box-shadow: 2px 0 0 rgba(255, 255, 255, 0.125) inset, -2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 2px 0 rgba(255, 255, 255, 0.25) inset, 0 -2px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(64, 64, 64, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 32px;
+  margin: 0;
+}
+
+/* ---------------- RESPONSIVE GOES HERE ---------------- */
+/* Large Mobile */
+/* Tablet */
+@media (min-width: 720px) {
+  h1 {
+    font-size: 2em;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1em;
+  }
+  header {
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  header nav {
+    box-shadow: 2px 0 0 rgba(255, 255, 255, 0.125) inset, -2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 2px 0 rgba(255, 255, 255, 0.25) inset, 0 -2px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+    background-color: rgba(64, 64, 64, 0.125);
+    -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+    border-radius: 8px;
+    padding: 0 32px;
+    margin: 0;
+  }
+  footer section {
+    flex-direction: row;
+  }
+  .iconBig {
+    width: 200px;
+  }
+  .iconMedium {
+    width: 150px;
+  }
+  .iconSmall {
+    width: 100px;
+  }
+  .griddy {
+    grid-template-rows: none;
+    grid-template-columns: auto auto auto auto;
+  }
+  .iconDisplay {
+    flex-direction: row;
+    place-content: space-around;
+  }
+  .iconDisplay .iconDisplayHeader {
+    text-align: left;
+  }
+  #hero {
+    flex-direction: row;
+  }
+  #hero #heroHeader {
+    text-align: left;
+  }
+}
+/* Desktop */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3em;
+  }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1em;
+  }
+  .iconBig {
+    width: 300px;
+  }
+  .iconMedium {
+    width: 200px;
+  }
+  .iconSmall {
+    width: 100px;
+  }
+}/*# sourceMappingURL=style.css.map */
