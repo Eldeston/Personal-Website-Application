@@ -1,3 +1,25 @@
+/* ---------------- VERCEL SPEED INSIGHTS ---------------- */
+
+// Initialize Vercel Speed Insights
+function initializeSpeedInsights() {
+    if (typeof window !== 'undefined' && window.fetch) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.vercel-analytics.com/v1/script.js';
+        script.async = true;
+        script.onload = function() {
+            if (typeof window.va !== 'undefined') {
+                window.va.track = window.va.track || function() {};
+            }
+        };
+        document.head.appendChild(script);
+    }
+}
+
+// Call on page load
+window.addEventListener('load', () => {
+    initializeSpeedInsights();
+});
+
 /* ---------------- GITHUB API ---------------- */
 
 function displayGithubStats(data) {
