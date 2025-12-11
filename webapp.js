@@ -30,17 +30,9 @@ if(process.env.DISCORD_TOKEN) {
     console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
 }
 
-app.use(express.static("public"));
-
-// Check if API is running
-app.get("/", (request, result) => {
-    console.log("API is running");
-    result.sendFile("index.html", { root: "./public" });
-});
-
 /* ---------------- GITHUB API ---------------- */
 
-app.get("/webapp/github", async (request, result) => {
+app.get("/api/github", async (request, result) => {
     console.log('Connected to "/webapp/github"');
 
     const username = request.query.username;
@@ -74,7 +66,7 @@ app.get("/webapp/github", async (request, result) => {
 
 /* ---------------- DISCORD API ---------------- */
 
-app.get("/webapp/discord", async (request, result) => {
+app.get("/api/discord", async (request, result) => {
     console.log('Connected to "/webapp/discord"');
 
     if (!discordClient.isReady()) return result.status(503).json({ error: 'Discord client not ready' });
@@ -106,6 +98,12 @@ app.get("/webapp/discord", async (request, result) => {
     }
 });
 
+// Does not work on Vercel
+app.use(express.static("public"));
+
+// Starts server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 })
+
+export default app;

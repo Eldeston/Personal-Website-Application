@@ -1,0 +1,8 @@
+{
+  "builds": [
+    { "src": "webapp.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "webapp.js" }
+  ]
+}

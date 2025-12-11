@@ -2,15 +2,17 @@
 
 // Initialize Vercel Speed Insights
 function initializeSpeedInsights() {
-    if (typeof window !== 'undefined' && window.fetch) {
+    if(typeof window !== 'undefined' && window.fetch) {
         const script = document.createElement('script');
         script.src = 'https://cdn.vercel-analytics.com/v1/script.js';
         script.async = true;
+
         script.onload = function() {
-            if (typeof window.va !== 'undefined') {
+            if(typeof window.va !== 'undefined') {
                 window.va.track = window.va.track || function() {};
             }
         };
+
         document.head.appendChild(script);
     }
 }
@@ -54,7 +56,7 @@ function displayGithubStats(data) {
 async function fetchGithubStats(username) {
     try {
         console.log('Fetching GitHub stats for:', username);
-        const response = await fetch(`/webapp/github?username=${username}`);
+        const response = await fetch(`/api/github?username=${username}`);
 
         if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -97,7 +99,7 @@ function displayDiscordStats(data) {
 async function fetchDiscordStats(guildId) {
     try {
         console.log(`Fetching Discrod stats for ${guildId}`);
-        const response = await fetch(`/webapp/discord?guildId=${guildId}`);
+        const response = await fetch(`/api/discord?guildId=${guildId}`);
 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
