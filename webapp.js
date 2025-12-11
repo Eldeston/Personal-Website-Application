@@ -13,10 +13,12 @@ const app = express();
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
 
 // Create Discord clients and specify intents
-const discordClient = new Client({ intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildPresences]
+const discordClient = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences
+    ]
 });
 
 // Login with token
@@ -29,6 +31,9 @@ if(process.env.DISCORD_TOKEN) {
 }
 
 app.use(express.static("public"));
+
+// Check if API is running
+app.get("/", (request, result) => result.send("API is running"));
 
 /* ---------------- GITHUB API ---------------- */
 
