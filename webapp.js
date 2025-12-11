@@ -32,9 +32,9 @@ if(process.env.DISCORD_TOKEN) {
 }
 
 // Homepage route
-app.get("/", (request, result) => {
-    result.sendFile("index.html", { root: "./public" });
-});
+// app.get("/", (request, result) => {
+//     result.sendFile("index.html", { root: "./public" });
+// });
 
 /* ---------------- GITHUB API ---------------- */
 
@@ -105,7 +105,7 @@ app.get("/api/discord", async (request, result) => {
 });
 
 // Serves the files for frontend
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 // Starts server
 if(process.env.NODE_ENV !== "production") {
