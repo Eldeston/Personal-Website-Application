@@ -30,6 +30,9 @@ if(process.env.DISCORD_TOKEN) {
     console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
 }
 
+// Homepage...?
+app.get("/");
+
 /* ---------------- GITHUB API ---------------- */
 
 app.get("/api/github", async (request, result) => {
@@ -99,7 +102,7 @@ app.get("/api/discord", async (request, result) => {
 });
 
 // Does not work on Vercel
-app.use(express.static("public"));
+// app.use(express.static("public"));
 
 // Starts server
 app.listen(port, () => {
