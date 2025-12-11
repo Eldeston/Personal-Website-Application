@@ -104,8 +104,8 @@ app.get("/api/discord", async (request, result) => {
     }
 });
 
-// Does not work on Vercel
-// app.use(express.static("public"));
+// Serves the files for frontend
+app.use(express.static("public"));
 
 // Starts server
 if(process.env.NODE_ENV !== "production") {
