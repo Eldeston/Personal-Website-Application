@@ -1,9 +1,4 @@
 {
-  "builds": [
-    { "src": "webapp.js", "use": "@vercel/node" }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "webapp.js" },
-    { "src": "/(.*)", "dest": "/public/$1" }
-  ]
+  "builds": [{ "src": "webapp.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "webapp.js" }]
 }
