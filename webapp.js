@@ -33,7 +33,10 @@ if(process.env.DISCORD_TOKEN) {
 app.use(express.static("public"));
 
 // Check if API is running
-app.get("/", (request, result) => result.send("API is running"));
+app.get("/", (request, result) => {
+    console.log("API is running");
+    result.sendFile("index.html", { root: "./public" });
+});
 
 /* ---------------- GITHUB API ---------------- */
 
