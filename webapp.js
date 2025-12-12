@@ -18,7 +18,7 @@ const port = 3000;
 const app = express();
 
 // Serves the files for frontend
-app.use(express.static("./public"));
+app.use("/", express.static("./public"));
 
 app.use((result, request) => {
     request.status(404);
