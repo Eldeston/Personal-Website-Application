@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
 
-// Config .env variables
 dotenv.config();
 
 // Imports routes
@@ -17,7 +16,7 @@ const app = express();
 // });
 
 // Serves the files for frontend (DOES NOT FLIPPIN WORK)
-app.use(express.static("public"));
+app.use(express.static("./public"));
 
 app.use((result, request) => {
     request.status(404);
