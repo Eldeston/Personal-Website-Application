@@ -1,7 +1,14 @@
 import dotenv from "dotenv";
 import express from "express";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
 dotenv.config();
+
+// Recreate __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Imports routes
 import github from "./routes/github.js";
@@ -16,7 +23,7 @@ const app = express();
 // });
 
 // Serves the files for frontend (DOES NOT FLIPPIN WORK)
-app.use(express.static("./public"));
+app.use(path.join(__dirname, 'public'));
 
 app.use((result, request) => {
     request.status(404);
