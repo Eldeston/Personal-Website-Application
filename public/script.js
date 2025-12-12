@@ -56,7 +56,7 @@ function displayGithubStats(data) {
 async function fetchGithubStats(username) {
     try {
         console.log('Fetching GitHub stats for:', username);
-        const response = await fetch(`/api/github?username=${username}`);
+        const response = await fetch(`/github?username=${username}`);
 
         if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -99,7 +99,7 @@ function displayDiscordStats(data) {
 async function fetchDiscordStats(guildId) {
     try {
         console.log(`Fetching Discrod stats for ${guildId}`);
-        const response = await fetch(`/api/discord?guildId=${guildId}`);
+        const response = await fetch(`/discord?guildId=${guildId}`);
 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
