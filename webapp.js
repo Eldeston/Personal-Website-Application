@@ -1,23 +1,17 @@
-import dotenv from "dotenv";
+const path = require("path");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
-import express from "express";
-import { Octokit } from "@octokit/rest";
-import { Client, GatewayIntentBits } from "discord.js";
+const express = require("express");
+const { Octokit } = require("@octokit/rest");
+const { Client, GatewayIntentBits } = require("discord.js");
 
 const port = 3000;
 const app = express();
 
-import path from "path";
-import { fileURLToPath } from "url";
-
-// Recreate __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Serves the files for frontend
-app.use(express.static(path.join(__dirname, 'public')));
+// __dirname is already available in CommonJS
+app.use(express.static(path.join(__dirname, "public")));
 
 /* ---------------- GITHUB API ---------------- */
 
@@ -70,20 +64,21 @@ const discordClient = new Client({
 // Login with token
 if(process.env.DISCORD_TOKEN) {
     discordClient.login(process.env.DISCORD_TOKEN)
-        .then(() => console.log('Discord bot logged in'))
-        .catch(error => console.error('Discord login error:', error.message));
+        .then(() => console.log("Discord bot logged in"))
+        .catch(error => console.error("Discord login error:", error.message));
 } else {
-    console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
+    console.warn("DISCORD_TOKEN not set — Discord endpoints will be unavailable");
 }
 
 app.get("/discord", async (request, result) => {
     console.log('Connected to "/discord"');
 
-    if (!discordClient.isReady()) return result.status(503).json({ error: 'Discord client not ready' });
+    if(!discordClient.isReady()) return result.status(503).json({ error: "Discord client not ready" });
 
     try {
         const botUser = discordClient.user;
         const guild = discordClient.guilds.cache.get(request.query.guildId);
+        if(!guild) return result.status(400).json({ error: "Invalid or missing guildId" });
 
         // Make sure members are cached
         await guild.members.fetch();
@@ -100,17 +95,17 @@ app.get("/discord", async (request, result) => {
             // avatar: botUser.avatar,
             guildname: guild.name,
             memberCount: guild.memberCount,
-            onlineCount: onlineCount
+            onlineCount
         });
-    } catch(err) {
-        console.error('Discord bot-stats error:', err);
-        result.status(500).json({ error: err.message });
+    } catch(error) {
+        console.error("Discord bot-stats error:", error);
+        result.status(500).json({ error: error.message });
     }
 });
 
-/* ---------------- STARTS SERVER ---------------- */
+/* ---------------- START SERVER ---------------- */
 
 // Listen on specified port
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 
-export default app;
+module.exports = app;
