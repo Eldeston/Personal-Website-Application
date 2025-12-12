@@ -10,8 +10,6 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-console.log(__dirname);
-
 // Imports routes
 import github from "./routes/github.js";
 import discord from "./routes/discord.js";
@@ -24,7 +22,7 @@ app.use(express.static("./public"));
 
 app.use((result, request) => {
     request.status(404);
-    request.send("<h1>Page not found. Error 404.</h1>")
+    request.send(`<h1>Page not found. Error 404. Root directory: ${__dirname}</h1>`)
 });
 
 /* ---------------- GITHUB API ---------------- */
