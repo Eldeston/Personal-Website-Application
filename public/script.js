@@ -98,7 +98,7 @@ function displayDiscordStats(data) {
 
 async function fetchDiscordStats(guildId) {
     try {
-        console.log(`Fetching Discrod stats for ${guildId}`);
+        console.log(`Fetching Discord stats for ${guildId}`);
         const response = await fetch(`/discord?guildId=${guildId}`);
 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);

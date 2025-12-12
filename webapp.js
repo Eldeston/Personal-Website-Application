@@ -19,11 +19,6 @@ const __dirname = path.dirname(__filename);
 // Serves the files for frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((result, request) => {
-    request.status(404);
-    request.send(`<h1>Page not found. Error 404.</h1>`)
-});
-
 /* ---------------- GITHUB API ---------------- */
 
 // Login through provided tokens
