@@ -17,13 +17,8 @@ import discord from "./routes/discord.js";
 const port = 3000;
 const app = express();
 
-// Homepage route (still does not work)
-// app.get("/", (request, result) => {
-//     result.sendFile("index.html", { root: "./public" });
-// });
-
-// Serves the files for frontend (DOES NOT FLIPPIN WORK)
-app.use(express.static(path.join(__dirname, 'public')));
+// Serves the files for frontend
+app.use(express.static("./public"));
 
 app.use((result, request) => {
     request.status(404);
