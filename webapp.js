@@ -1,17 +1,23 @@
-const path = require("path");
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const express = require("express");
-const { Octokit } = require("@octokit/rest");
-const { Client, GatewayIntentBits } = require("discord.js");
+import express from "express";
+import { Octokit } from "@octokit/rest";
+import { Client, GatewayIntentBits } from "discord.js";
 
 const port = 3000;
 const app = express();
 
-// __dirname is already available in CommonJS
-app.use(express.static(path.join(__dirname, "public")));
+import path from "path";
+import { fileURLToPath } from "url";
+
+// Recreate __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serves the files for frontend
+app.use(express.static(path.join(__dirname, 'public')));
 
 /* ---------------- GITHUB API ---------------- */
 
@@ -108,4 +114,4 @@ app.get("/discord", async (request, result) => {
 // Listen on specified port
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 
-module.exports = app;
+export default app;
