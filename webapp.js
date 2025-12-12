@@ -29,7 +29,7 @@ app.use((result, request) => {
 // Login through provided tokens
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
 
-app.get("/", async (request, result) => {
+app.get("/github", async (request, result) => {
     console.log('Connected to "/github"');
 
     const username = request.query.username;
@@ -81,7 +81,7 @@ if(process.env.DISCORD_TOKEN) {
     console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
 }
 
-app.get("/", async (request, result) => {
+app.get("/discord", async (request, result) => {
     console.log('Connected to "/discord"');
 
     if (!discordClient.isReady()) return result.status(503).json({ error: 'Discord client not ready' });
