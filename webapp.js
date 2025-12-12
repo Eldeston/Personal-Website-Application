@@ -38,3 +38,5 @@ app.use("/discord", discord);
 
 // Listen on specified port
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+
+export default app;
