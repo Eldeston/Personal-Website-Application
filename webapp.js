@@ -1,39 +1,117 @@
 import dotenv from "dotenv";
+
+dotenv.config();
+
 import express from "express";
+import { Octokit } from "@octokit/rest";
+import { Client, GatewayIntentBits } from "discord.js";
+
+const port = 3000;
+const app = express();
 
 import path from "path";
 import { fileURLToPath } from "url";
-
-dotenv.config();
 
 // Recreate __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Imports routes
-import github from "./routes/github.js";
-import discord from "./routes/discord.js";
-
-const port = 3000;
-const app = express();
-
 // Serves the files for frontend
-app.use("/", express.static("./public"));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((result, request) => {
     request.status(404);
-    request.send(`<h1>Page not found. Error 404. Root directory: ${__dirname}</h1>`)
+    request.send(`<h1>Page not found. Error 404.</h1>`)
 });
 
 /* ---------------- GITHUB API ---------------- */
 
-// Mount routes for Github
-app.use("/github", github);
+// Login through provided tokens
+const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
+
+app.get("/", async (request, result) => {
+    console.log('Connected to "/github"');
+
+    const username = request.query.username;
+
+    if(!username) return result.status(400).json({ error: "username query param required" });
+
+    try {
+        const userData = await octokit.users.getByUsername({ username });
+        const repositoryData = await octokit.paginate(octokit.repos.listForUser, { username, per_page: 100 });
+
+        const totalStars = repositoryData.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+        const totalForks = repositoryData.reduce((sum, r) => sum + (r.forks_count || 0), 0);
+
+        result.json({
+            login: userData.data.login,
+            name: userData.data.name,
+            avatar_url: userData.data.avatar_url,
+            html_url: userData.data.html_url,
+            followers: userData.data.followers,
+            following: userData.data.following,
+            public_repos: userData.data.public_repos,
+            public_gists: userData.data.public_gists,
+            created_at: userData.data.created_at,
+            total_stars: totalStars,
+            total_forks: totalForks
+        });
+    } catch(error) {
+        result.status(500).json({ error: error.message });
+    }
+});
 
 /* ---------------- DISCORD API ---------------- */
 
-// Mount routes for Discord
-app.use("/discord", discord);
+// Create Discord clients and specify intents
+const discordClient = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildPresences
+    ]
+});
+
+// Login with token
+if(process.env.DISCORD_TOKEN) {
+    discordClient.login(process.env.DISCORD_TOKEN)
+        .then(() => console.log('Discord bot logged in'))
+        .catch(error => console.error('Discord login error:', error.message));
+} else {
+    console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
+}
+
+app.get("/", async (request, result) => {
+    console.log('Connected to "/discord"');
+
+    if (!discordClient.isReady()) return result.status(503).json({ error: 'Discord client not ready' });
+
+    try {
+        const botUser = discordClient.user;
+        const guild = discordClient.guilds.cache.get(request.query.guildId);
+
+        // Make sure members are cached
+        await guild.members.fetch();
+
+        // Check for online members and find the size
+        const onlineCount = guild.members.cache.filter(
+            member => member.presence && member.presence.status === "online"
+        ).size;
+
+        result.json({
+            // id: botUser.id,
+            username: botUser.username,
+            // discriminator: botUser.discriminator,
+            // avatar: botUser.avatar,
+            guildname: guild.name,
+            memberCount: guild.memberCount,
+            onlineCount: onlineCount
+        });
+    } catch(err) {
+        console.error('Discord bot-stats error:', err);
+        result.status(500).json({ error: err.message });
+    }
+});
 
 /* ---------------- STARTS SERVER ---------------- */
 
