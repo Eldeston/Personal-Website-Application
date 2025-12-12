@@ -34,7 +34,7 @@ app.use("/github", github);
 // Mount routes for Discord
 app.use("/discord", discord);
 
-// Starts server
-app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+/* ---------------- STARTS SERVER ---------------- */
 
-export default app;
+// Listen on specified port
+app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
