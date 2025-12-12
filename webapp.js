@@ -23,7 +23,7 @@ const app = express();
 // });
 
 // Serves the files for frontend (DOES NOT FLIPPIN WORK)
-app.use(path.join(__dirname, 'public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((result, request) => {
     request.status(404);
