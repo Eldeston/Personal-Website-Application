@@ -40,7 +40,7 @@ function displayGithubStats(data) {
 
     container.innerHTML = `
         <div>
-            <h2>👤 Username: ${data.name || data.login}</h2>
+            <h2>👤 ${data.name || data.login}</h2>
             <p>⭐ Stars: ${data.total_stars}</p>
             <p>🍴 Forks: ${data.total_forks}</p>
         </div>
@@ -83,12 +83,12 @@ function displayDiscordStats(data) {
 
     container.innerHTML = `
         <div>
-            <h2>🤖 Bot Name: ${data.username}</h2>
-            <p>⚙️ Status: loading...</p>
+            <h2>🤖 ${data.username}</h2>
+            <p>⚙️ Status: online</p>
         </div>
 
         <div>
-            <p>🏛️ Guild Name: ${data.guildname}</p>
+            <h2>🏛️ ${data.guildname}</h2>
             <p>👥 Member Count: ${data.memberCount}</p>
             <p>🟢 Online Count: ${data.onlineCount}</p>
         </div>

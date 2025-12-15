@@ -17,6 +17,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serves the files for frontend
+// Necessary for css and other media
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ---------------- GITHUB API ---------------- */
