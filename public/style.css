@@ -1,9 +1,8 @@
+/* ---------------- USE GOES HERE ---------------- */
 /* ---------------- VARIABLES GOES HERE ---------------- */
-/* ---------------- IMPORT GOES HERE ---------------- */
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
-/* ---------------- MIXIN GOES HERE ---------------- */
 /* ---------------- ANIMATION GOES HERE ---------------- */
 /* Smoothes the blinking cursor */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @keyframes alphaAnim {
   from {
     opacity: 0%;
@@ -12,6 +11,7 @@
     opacity: 100%;
   }
 }
+/* ---------------- IMPORTS GOES HERE ---------------- */
 /* ---------------- LAYOUT GOES HERE ---------------- */
 html, body {
   margin: 0;
@@ -176,7 +176,7 @@ main article {
 }
 
 #github-stats, #discord-stats {
-  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.125) inset, 2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -2px 0 rgba(255, 255, 255, 0.25) inset, 0 2px 0 rgba(0, 0, 0, 0.25) inset;
+  box-shadow: -2px 0 0 rgba(255, 255, 255, 0.125) inset, 2px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -2px 0 rgba(255, 255, 255, 0.25) inset, 0 2px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black inset;
   background-color: rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   padding: 16px;
