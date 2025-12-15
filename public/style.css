@@ -72,9 +72,9 @@ header nav {
 
 main section {
   display: flex;
-  place-content: space-around;
-  flex-direction: column;
+  flex-wrap: wrap;
   place-items: center;
+  place-content: space-around;
   padding: 128px 0;
 }
 main section #heroHeader {
@@ -82,38 +82,38 @@ main section #heroHeader {
 }
 main #about #github-stats, main #about #discord-stats {
   display: flex;
+  flex-wrap: wrap;
   place-content: space-between;
 }
 main #work #iFrameContainer {
   display: flex;
+  flex-wrap: wrap;
   place-content: center;
 }
 main #work #iFrameContainer iFrame {
   aspect-ratio: 16/9;
-  width: 50%;
+  width: 480px;
 }
 
 footer section {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   place-content: space-between;
 }
 
 .griddy {
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: auto auto;
-  place-items: center;
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: space-evenly;
 }
 
 .iconDisplay {
   display: flex;
-  flex-direction: column;
-  place-items: center;
+  flex-wrap: wrap;
+  place-content: space-around;
 }
 .iconDisplay .iconDisplayHeader {
-  text-align: center;
+  place-content: center;
 }
 
 .fillWidth {
@@ -223,9 +223,6 @@ footer {
     padding: 0 32px;
     margin: 0;
   }
-  footer section {
-    flex-direction: row;
-  }
   .iconBig {
     width: 180px;
   }
@@ -234,23 +231,6 @@ footer {
   }
   .iconSmall {
     width: 100px;
-  }
-  .griddy {
-    grid-template-rows: none;
-    grid-template-columns: auto auto auto auto;
-  }
-  .iconDisplay {
-    flex-direction: row;
-    place-content: space-around;
-  }
-  .iconDisplay .iconDisplayHeader {
-    text-align: left;
-  }
-  #hero {
-    flex-direction: row;
-  }
-  #hero #heroHeader {
-    text-align: left;
   }
 }
 /* Desktop */

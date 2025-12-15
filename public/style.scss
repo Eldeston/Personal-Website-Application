@@ -67,9 +67,9 @@ header {
 main {
     section {
         display: flex;
-        place-content: space-around;
-        flex-direction: column;
+        flex-wrap: wrap;
         place-items: center;
+        place-content: space-around;
         padding: 128px 0;
 
         #heroHeader {
@@ -80,6 +80,7 @@ main {
     #about {
         #github-stats, #discord-stats {
             display: flex;
+            flex-wrap: wrap;
             place-content: space-between;
         }
     }
@@ -87,11 +88,12 @@ main {
     #work {
         #iFrameContainer {
             display: flex;
+            flex-wrap: wrap;
             place-content: center;
 
             iFrame {
                 aspect-ratio: 16 / 9;
-                width: 50%;
+                width: 480px;
             }
         }
     }
@@ -99,28 +101,23 @@ main {
 
 footer section{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     place-content: space-between;
 }
 
 .griddy {
-    display: grid;
-
-    grid-template-rows: auto auto;
-    grid-template-columns: auto auto;
-
-    place-items: center;
-
-    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: space-evenly;
 }
 
 .iconDisplay {
     display: flex;
-    flex-direction: column;
-    place-items: center;
+    flex-wrap: wrap;
+    place-content: space-around;
 
     .iconDisplayHeader {
-        text-align: center;
+        place-content: center;
     }
 }
 
@@ -194,7 +191,7 @@ footer {
 
 /* Large Mobile */
 @media (min-width: 540px) {
-    
+
 }
 
 /* Tablet */
@@ -221,10 +218,6 @@ footer {
         }
     }
 
-    footer section {
-        flex-direction: row;
-    }
-
     .iconBig {
         width: 180px;
     }
@@ -235,28 +228,6 @@ footer {
 
     .iconSmall {
         width: 100px;
-    }
-
-    .griddy {
-        grid-template-rows: none;
-        grid-template-columns: auto auto auto auto;
-    }
-
-    .iconDisplay {
-        flex-direction: row;
-        place-content: space-around;
-        
-        .iconDisplayHeader {
-            text-align: left;
-        }
-    }
-
-    #hero {
-        flex-direction: row;
-        
-        #heroHeader {
-            text-align: left;
-        }
     }
 }
 
