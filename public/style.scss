@@ -37,10 +37,14 @@ a {
     color: white;
 }
 
+iframe {
+    /* Remove the default border used by iframe */
+    border: none;
+}
+
 header, main, footer {
     box-sizing: border-box;
     width: min(100%, 1024px);
-    margin: 16px 0;
 }
 
 header {
@@ -156,9 +160,6 @@ footer section{
     z-index: -1;
     /* Keep background sticky */
     position: fixed;
-
-    /* Remove the default border used by iframe */
-    border: none;
 }
 
 /* ---------------- STYLING GOES HERE ---------------- */
