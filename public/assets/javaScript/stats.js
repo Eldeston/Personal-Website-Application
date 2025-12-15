@@ -43,12 +43,14 @@ function displayGithubStats(data) {
             <h2>👤 ${data.name || data.login}</h2>
             <p>⭐ Stars: ${data.total_stars}</p>
             <p>🍴 Forks: ${data.total_forks}</p>
+            <p>👥 Followers: ${data.followers}</p>
         </div>
 
         <div>
             <h2><a href="https://github.com/Eldeston">View Profile</a></h2>
-            <p>👥 Followers: ${data.followers}</p>
-            <p>📦 Public Repos: ${data.public_repos}</p>
+            <p>🗓️ Joined At: ${data.created_at}</p>
+            <p>📦 Repositories: ${data.public_repos}</p>
+            <p>📄 Gists: ${data.public_gists}</p>
         </div>
     `;
 }

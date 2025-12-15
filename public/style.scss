@@ -140,12 +140,7 @@ main {
     }
 
     #about {
-        #github-stats {
-            display: flex;
-            place-content: space-between;
-        }
-
-        #discord-stats {
+        #github-stats, #discord-stats {
             display: flex;
             place-content: space-between;
         }
@@ -196,19 +191,19 @@ footer section{
 }
 
 .iconBig {
-    width: 150px;
-}
-
-.iconMedium {
     width: 120px;
 }
 
-.iconSmall {
-    width: 90px;
+.iconMedium {
+    width: 100px;
 }
 
-.iconTiny {
-    width: 75px;
+.iconSmall {
+    width: 80px;
+}
+
+.iconSmall {
+    width: 60px;
 }
 
 #githubPfp {
@@ -296,11 +291,11 @@ footer {
     }
 
     .iconBig {
-        width: 200px;
+        width: 180px;
     }
 
     .iconMedium {
-        width: 150px;
+        width: 140px;
     }
 
     .iconSmall {
@@ -345,14 +340,14 @@ footer {
     }
 
     .iconBig {
-        width: 300px;
+        width: 240px;
     }
 
     .iconMedium {
-        width: 200px;
+        width: 180px;
     }
 
     .iconSmall {
-        width: 100px;
+        width: 120px;
     }
 }
