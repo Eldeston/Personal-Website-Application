@@ -46,9 +46,9 @@ function displayGithubStats(data) {
         </div>
 
         <div>
+            <h2><a href="https://github.com/Eldeston">View Profile</a></h2>
             <p>👥 Followers: ${data.followers}</p>
             <p>📦 Public Repos: ${data.public_repos}</p>
-            <p><a href="${data.html_url}" target="_blank">View Profile</a><p>
         </div>
     `;
 }
@@ -84,17 +84,16 @@ function displayDiscordStats(data) {
     container.innerHTML = `
         <div>
             <h2>🤖 Bot Name: ${data.username}</h2>
-            <p>🏛️ Guild Name: ${data.guildname}</p>
+            <p>⚙️ Status: loading...</p>
         </div>
 
         <div>
+            <p>🏛️ Guild Name: ${data.guildname}</p>
             <p>👥 Member Count: ${data.memberCount}</p>
             <p>🟢 Online Count: ${data.onlineCount}</p>
         </div>
     `;
 }
-
-// ...existing code...
 
 async function fetchDiscordStats(guildId) {
     try {
