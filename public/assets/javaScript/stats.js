@@ -34,7 +34,7 @@ function displayGithubStats(data) {
 
     container.innerHTML = `
         <div>
-            <h2>👤 Eldeston</h2>
+            <h2>👨‍🎓 Eldeston</h2>
             <p>👥 Followers: ${data.followers}</p>
             <p>⭐ Stars: ${data.total_stars}</p>
             <p>🍴 Forks: ${data.total_forks}</p>
@@ -72,15 +72,11 @@ function displayDiscordStats(data) {
     // Example: update DOM with the data
     const container = document.getElementById('discord-stats');
 
-    if(!container) {
-        console.warn('No #discord-stats element found');
-        return;
-    }
-
     container.innerHTML = `
         <div>
             <h2>🤖 ${data.username}</h2>
             <p>⚙️ Status: online</p>
+            <p>🗓️ Created: ${data.created_at}</p>
         </div>
 
         <div>

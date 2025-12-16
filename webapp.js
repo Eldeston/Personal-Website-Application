@@ -98,6 +98,7 @@ app.get("/discord", async (request, result) => {
         result.json({
             // id: botUser.id,
             username: botUser.username,
+            created_at: botUser.createdAt,
             // discriminator: botUser.discriminator,
             // avatar: botUser.avatar,
             guildname: guild.name,
