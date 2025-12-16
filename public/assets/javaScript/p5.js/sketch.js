@@ -3,7 +3,7 @@ p5.disableFriendlyErrors = true;
 
 const particles = 4096;
 const particleSize = 1;
-const particleSpeed = 1.0;
+const particleSpeed = 2.0;
 
 const noiseSpeed = 0.03125;
 const noiseScale = 1 / 512;
