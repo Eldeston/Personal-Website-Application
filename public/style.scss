@@ -106,6 +106,7 @@ main {
 footer section{
     display: flex;
     flex-wrap: wrap;
+    gap: common.$paddingSmall;
     place-content: space-between;
 }
 

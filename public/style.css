@@ -102,6 +102,7 @@ main #work #iFrameContainer iFrame {
 footer section {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
   place-content: space-between;
 }
 
