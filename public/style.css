@@ -29,11 +29,11 @@ body {
 }
 
 h1 {
-  font-size: 1.5em;
+  font-size: 2em;
 }
 
 h2 {
-  font-size: 1.25em;
+  font-size: 1.5em;
 }
 
 h3 {
@@ -104,12 +104,14 @@ footer section {
 .griddy {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
   place-content: space-evenly;
 }
 
 .iconDisplay {
   display: flex;
   flex-wrap: wrap;
+  gap: 16px;
   place-content: space-around;
 }
 .iconDisplay .iconDisplayHeader {
@@ -200,10 +202,10 @@ footer {
 /* Tablet */
 @media (min-width: 720px) {
   h1 {
-    font-size: 2em;
+    font-size: 3em;
   }
   h2 {
-    font-size: 1.5em;
+    font-size: 2em;
   }
   h3 {
     font-size: 1em;
@@ -235,15 +237,6 @@ footer {
 }
 /* Desktop */
 @media (min-width: 1024px) {
-  h1 {
-    font-size: 3em;
-  }
-  h2 {
-    font-size: 2em;
-  }
-  h3 {
-    font-size: 1em;
-  }
   .iconBig {
     width: 240px;
   }

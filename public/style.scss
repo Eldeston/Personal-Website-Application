@@ -20,11 +20,11 @@ body {
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 h2 {
-    font-size: 1.25em;
+    font-size: 1.5em;
 }
 
 h3 {
@@ -108,12 +108,14 @@ footer section{
 .griddy {
     display: flex;
     flex-wrap: wrap;
+    gap: common.$paddingSmall;
     place-content: space-evenly;
 }
 
 .iconDisplay {
     display: flex;
     flex-wrap: wrap;
+    gap: common.$paddingSmall;
     place-content: space-around;
 
     .iconDisplayHeader {
@@ -197,17 +199,17 @@ footer {
 /* Tablet */
 @media (min-width: 720px) {
     h1 {
-        font-size: 2em;
+        font-size: 3em;
     }
 
     h2 {
-        font-size: 1.5em;
+        font-size: 2em;
     }
 
     h3 {
         font-size: 1em;
     }
-
+    
     header {
         box-shadow: none;
         backdrop-filter: none;
@@ -233,18 +235,6 @@ footer {
 
 /* Desktop */
 @media (min-width: 1024px) {
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    h3 {
-        font-size: 1em;
-    }
-
     .iconBig {
         width: 240px;
     }

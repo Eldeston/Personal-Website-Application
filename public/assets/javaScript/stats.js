@@ -40,7 +40,7 @@ function displayGithubStats(data) {
 
     container.innerHTML = `
         <div>
-            <h2>👤 ${data.name || data.login}</h2>
+            <h2>👤 ${data.login}</h2>
             <p>👥 Followers: ${data.followers}</p>
             <p>⭐ Stars: ${data.total_stars}</p>
             <p>🍴 Forks: ${data.total_forks}</p>
