@@ -31,6 +31,10 @@ h3 {
     font-size: 1em;
 }
 
+h1, h2, h3 {
+    flex: 0 1 auto;
+}
+
 a {
     display: inline-block;
     text-decoration: none;
@@ -209,7 +213,7 @@ footer {
     h3 {
         font-size: 1em;
     }
-    
+
     header {
         box-shadow: none;
         backdrop-filter: none;

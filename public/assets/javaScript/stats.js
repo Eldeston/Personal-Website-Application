@@ -25,28 +25,27 @@ window.addEventListener('load', () => {
 /* ---------------- GITHUB API ---------------- */
 
 function displayGithubStats(data) {
+    // Get image element id
     const githubPfp = document.getElementById('githubPfp');
-    // Example: update DOM with the data
-    const container = document.getElementById('github-stats');
-
     // Sets current Github profile picture
     githubPfp.src = data.avatar_url;
 
-    container.innerHTML = `
-        <div>
-            <h2>👨‍🎓 Eldeston</h2>
-            <p>👥 Followers: ${data.followers}</p>
-            <p>⭐ Stars: ${data.total_stars}</p>
-            <p>🍴 Forks: ${data.total_forks}</p>
-        </div>
+    // Get element ids to update document with data for Github
+    const userFollows = document.getElementById('userFollows');
+    const userStars = document.getElementById('userStars');
+    const userForks = document.getElementById('userForks');
 
-        <div>
-            <h2><a href="https://github.com/Eldeston">View Profile</a></h2>
-            <p>🗓️ Joined: ${data.created_at}</p>
-            <p>📦 Repositories: ${data.public_repos}</p>
-            <p>📄 Gists: ${data.public_gists}</p>
-        </div>
-    `;
+    const userJoin = document.getElementById('userJoin');
+    const userRepos = document.getElementById('userRepos');
+    const userGists = document.getElementById('userGists');
+
+    userFollows.innerHTML = `👥 Followers: ${data.followers}`;
+    userStars.innerHTML = `⭐ Stars: ${data.total_stars}`;
+    userForks.innerHTML = `🍴 Forks: ${data.total_forks}`;
+
+    userJoin.innerHTML = `🗓️ Joined: ${data.created_at}`;
+    userRepos.innerHTML = `📦 Repositories: ${data.public_repos}`;
+    userGists.innerHTML = `📄 Gists: ${data.public_gists}`;
 }
 
 async function fetchGithubStats(username) {
@@ -69,22 +68,18 @@ async function fetchGithubStats(username) {
 /* ---------------- DISCORD API ---------------- */
 
 function displayDiscordStats(data) {
-    // Example: update DOM with the data
-    const container = document.getElementById('discord-stats');
+    // Get element ids to update document with data for Discord
+    const botStatus = document.getElementById('botStatus');
+    const botCreation = document.getElementById('botCreation');
 
-    container.innerHTML = `
-        <div>
-            <h2>🤖 ${data.username}</h2>
-            <p>⚙️ Status: online</p>
-            <p>🗓️ Created: ${data.created_at}</p>
-        </div>
+    const serverCount = document.getElementById('serverCount');
+    const serverOnline = document.getElementById('serverOnline');
 
-        <div>
-            <h2>🏛️ ${data.guildname}</h2>
-            <p>👥 Member Count: ${data.memberCount}</p>
-            <p>🟢 Online Count: ${data.onlineCount}</p>
-        </div>
-    `;
+    botStatus.innerHTML = `⚙️ Status: online`;
+    botCreation.innerHTML = `🗓️ Created: ${data.created_at}`;
+
+    serverCount.innerHTML = `👥 Member Count: ${data.memberCount}`;
+    serverOnline.innerHTML = `🟢 Online Count: ${data.onlineCount}`;
 }
 
 async function fetchDiscordStats(guildId) {
