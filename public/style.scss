@@ -82,7 +82,7 @@ main {
     }
 
     #about {
-        #github-stats, #discord-stats {
+        #console-window {
             display: flex;
             flex-wrap: wrap;
             place-content: space-between;
@@ -184,7 +184,7 @@ main {
     }
 }
 
-#github-stats, #discord-stats {
+#console-window {
     @include common.embedStyle(common.$paddingSmall, 0);
 }
 

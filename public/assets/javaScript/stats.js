@@ -39,6 +39,7 @@ function displayGithubStats(data) {
     const userRepos = document.getElementById('userRepos');
     const userGists = document.getElementById('userGists');
 
+    // Update each element's inner HTML
     userFollows.innerHTML = `👥 Followers: ${data.followers}`;
     userStars.innerHTML = `⭐ Stars: ${data.total_stars}`;
     userForks.innerHTML = `🍴 Forks: ${data.total_forks}`;
@@ -69,14 +70,15 @@ async function fetchGithubStats(username) {
 
 function displayDiscordStats(data) {
     // Get element ids to update document with data for Discord
-    const botStatus = document.getElementById('botStatus');
     const botCreation = document.getElementById('botCreation');
+    const botStatus = document.getElementById('botStatus');
 
     const serverCount = document.getElementById('serverCount');
     const serverOnline = document.getElementById('serverOnline');
 
-    botStatus.innerHTML = `⚙️ Status: online`;
+    // Update each element's inner HTML
     botCreation.innerHTML = `🗓️ Created: ${data.created_at}`;
+    botStatus.innerHTML = `⚙️ Status: online`;
 
     serverCount.innerHTML = `👥 Member Count: ${data.memberCount}`;
     serverOnline.innerHTML = `🟢 Online Count: ${data.onlineCount}`;
