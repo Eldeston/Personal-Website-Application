@@ -29,18 +29,12 @@ function displayGithubStats(data) {
     // Example: update DOM with the data
     const container = document.getElementById('github-stats');
 
-    // Warn and exit when no element is found
-    if(!container) {
-        console.warn('No #github-stats element found');
-        return;
-    }
-
     // Sets current Github profile picture
     githubPfp.src = data.avatar_url;
 
     container.innerHTML = `
         <div>
-            <h2>👤 ${data.login}</h2>
+            <h2>👤 Eldeston</h2>
             <p>👥 Followers: ${data.followers}</p>
             <p>⭐ Stars: ${data.total_stars}</p>
             <p>🍴 Forks: ${data.total_forks}</p>
