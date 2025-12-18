@@ -36,7 +36,6 @@ h1, h2, h3 {
 }
 
 a {
-    display: inline-block;
     text-decoration: none;
     color: white;
 }
@@ -53,8 +52,9 @@ header, main, footer {
 
 header {
     display: flex;
-    place-content: space-between;
     position: sticky;
+    gap: common.$paddingSmall;
+    place-content: space-between;
 
     top: 0;
     z-index: 8;
@@ -73,7 +73,7 @@ main {
         display: flex;
         flex-wrap: wrap;
         place-items: center;
-        place-content: space-around;
+        gap: common.$paddingSmall;
         padding: 128px 0;
 
         #heroHeader {
@@ -96,8 +96,8 @@ main {
             place-content: center;
 
             iFrame {
-                aspect-ratio: 16 / 9;
                 width: 480px;
+                aspect-ratio: 16 / 9;
             }
         }
     }

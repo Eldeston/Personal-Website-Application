@@ -62,8 +62,9 @@ header, main, footer {
 
 header {
   display: flex;
-  place-content: space-between;
   position: sticky;
+  gap: 16px;
+  place-content: space-between;
   top: 0;
   z-index: 8;
 }
@@ -95,8 +96,8 @@ main #work #iFrameContainer {
   place-content: center;
 }
 main #work #iFrameContainer iFrame {
-  aspect-ratio: 16/9;
   width: 480px;
+  aspect-ratio: 16/9;
 }
 
 footer section {
