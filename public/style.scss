@@ -14,17 +14,14 @@ body {
     display: flex;
     flex-direction: column;
     place-items: center;
-    font-family: 'JetBrains Mono';
-    color: white;
-    background-color: black;
 }
 
 h1 {
-    font-size: 2em;
+    font-size: clamp(2em, 5vw, 3em);
 }
 
 h2 {
-    font-size: 1.5em;
+    font-size: clamp(1.5em, 2.5vw, 2em);
 }
 
 h3 {
@@ -65,16 +62,17 @@ header {
 
     nav {
         place-content: center;
+        gap: common.$paddingSmall;
     }
 }
 
 main {
     section {
-        display: flex;
-        flex-wrap: wrap;
-        place-items: center;
-        gap: common.$paddingSmall;
+        @include common.flexRowWrap(common.$paddingSmall);
+
         padding: 128px 0;
+        place-items: center;
+        place-content: center;
 
         #heroHeader {
             text-align: center;
@@ -82,17 +80,17 @@ main {
     }
 
     #about {
-        #console-window {
-            display: flex;
-            flex-wrap: wrap;
+        .consoleWindow {
+            @include common.flexRowWrap();
+
             place-content: space-between;
         }
     }
 
     #work {
         #iFrameContainer {
-            display: flex;
-            flex-wrap: wrap;
+            @include common.flexRowWrap();
+
             place-content: center;
 
             iFrame {
@@ -104,23 +102,20 @@ main {
 }
 
 footer section{
-    display: flex;
-    flex-wrap: wrap;
-    gap: common.$paddingSmall;
+    @include common.flexRowWrap(common.$paddingSmall);
+
     place-content: space-between;
 }
 
 .griddy {
-    display: flex;
-    flex-wrap: wrap;
-    gap: common.$paddingSmall;
+    @include common.flexRowWrap(common.$paddingSmall);
+
     place-content: space-evenly;
 }
 
 .iconDisplay {
-    display: flex;
-    flex-wrap: wrap;
-    gap: common.$paddingSmall;
+    @include common.flexRowWrap(common.$paddingSmall);
+
     place-content: space-around;
 
     .iconDisplayHeader {
@@ -155,11 +150,9 @@ footer section{
 #sketchP5 {
     /* For some reason, a lot of the elements have top set for them */
     top: 0;
-
     /* Ensures the full screen is utilized by p5.js */
     width: 100vw;
     height: 100vh;
-
     /* Keeps background behind all the elements since it's sticky */
     z-index: -1;
     /* Keep background sticky */
@@ -168,30 +161,34 @@ footer section{
 
 /* ---------------- STYLING GOES HERE ---------------- */
 
-.cursorBlink {
-    animation: alphaAnim 1s infinite;
+body {
+    font-family: 'JetBrains Mono';
+    color: white;
+    background-color: black;
+
+    @include common.debugStyle();
 }
 
 header {
-    @include common.debugStyle();
     @include common.windowStyle(common.$paddingSmall, 0);
 }
 
 main {
-    @include common.debugStyle();
-
     article {
         @include common.windowStyle(common.$paddingBig, 16px 0);
     }
 }
 
-#console-window {
+footer {
+    @include common.windowStyle(common.$paddingBig, 0);
+}
+
+.consoleWindow {
     @include common.embedStyle(common.$paddingSmall, 0);
 }
 
-footer {
-    @include common.debugStyle();
-    @include common.windowStyle(common.$paddingBig, 0);
+.cursorBlink {
+    animation: alphaAnim 1s infinite;
 }
 
 /* ---------------- RESPONSIVE GOES HERE ---------------- */
@@ -203,22 +200,10 @@ footer {
 
 /* Tablet */
 @media (min-width: 720px) {
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    h3 {
-        font-size: 1em;
-    }
-
     header {
         box-shadow: none;
         backdrop-filter: none;
-        background-color: rgba(0, 0, 0, 0);
+        background-color: transparent;
 
         nav {
             @include common.windowStyle(0 common.$paddingBig, 0);

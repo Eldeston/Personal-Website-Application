@@ -9,6 +9,8 @@ $colTertiary: #ff6600;
 $paddingBig: 32px;
 $paddingSmall: 16px;
 
+/* ---------------- MIXINS GOES HERE ---------------- */
+
 @mixin windowStyle($windowPadding, $windowMargin) {
     box-shadow:
         2px 0 0 rgb(255, 255, 255, 0.125) inset, -2px 0 0 rgb(0, 0, 0, 0.125) inset,
@@ -36,17 +38,26 @@ $paddingSmall: 16px;
     margin: $windowMargin;
 }
 
-@mixin debugStyle() {
-    @if $debugMode == true {
-        border: $colTertiary solid 2px;
+@mixin flexRowWrap($gap: 0) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+}
 
+// helper: produce N nested levels
+@mixin _debugLevel($current, $max, $hueStart, $hueStep, $width) {
+    @if $current <= $max {
         > * {
-            border: $colSecondary solid 2px;
-
-            > * {
-                border: $colMain solid 2px;
-            }
+            border: hsl($hueStart + $hueStep, 100%, 50%) solid $width;
+            @include _debugLevel($current + 1, $max, $hueStart + $hueStep, $hueStep, $width);
         }
+    }
+}
+
+// public mixin: checks $debugMode inside and accepts adjustable steps
+@mixin debugStyle($levels: 5, $hueStart: 0, $hueStep: 72, $width: 2px) {
+    @if $debugMode == true {
+        @include _debugLevel(1, $levels, $hueStart, $hueStep, $width);
     }
 }
 
