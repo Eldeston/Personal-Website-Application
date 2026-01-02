@@ -53,23 +53,6 @@ function displayGithubStats(data) {
 }
 
 function displayTopLanguages(languages = []) {
-    const textIds = ['language1', 'language2', 'language3', 'language4', 'language5'];
-    const barIds = ['languageBar1', 'languageBar2', 'languageBar3', 'languageBar4', 'languageBar5'];
-
-    const colorMap = {
-        'JavaScript': '#f1e05a',
-        'TypeScript': '#2b7489',
-        'Python': '#3572A5',
-        'CSS': '#563d7c',
-        'HTML': '#e34c26',
-        'Java': '#b07219',
-        'C++': '#f34b7d',
-        'C#': '#178600',
-        'Shell': '#89e051',
-        'PHP': '#4F5D95',
-        'Go': '#00ADD8'
-    };
-    
     const textOthers = document.getElementById('others');
 
     const languagePercentTotal = languages.reduce((sum, lang) => sum + lang.percentage, 0);
@@ -79,29 +62,66 @@ function displayTopLanguages(languages = []) {
     textOthers.style.borderLeft = `8px solid gray`;
     textOthers.style.paddingLeft = '16px';
 
+    // Language color map based from Github
+    // Some colors are not officially recognized
+    const colorMap = {
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#3178c6',
+        'HTML': '#e34c26',
+        'CSS': '#563d7c',
+        'Python': '#3572A5',
+        'Java': '#b07219',
+        'C++': '#f34b7d',
+        'C#': '#178600',
+        'Go': '#00ADD8',
+        'PHP': '#4F5D95',
+        'Shell': '#89e051',
+        'Rust': '#dea584',
+        'Kotlin': '#A97BFF',
+        'Swift': '#F05138',
+        'Dart': '#00B4AB',
+        'Scala': '#c22d40',
+        'Elixir': '#6e4a7e',
+        'Haskell': '#5e5086',
+        'Lua': '#000080',
+        'R': '#198CE7',
+        'GLSL': '#6BB2FF',
+        'HLSL': '#9FC6FF',
+        'WGSL': '#FF9A3C',
+        'Metal': '#8FA3FF',
+        'ShaderLab': '#D28CFF',
+        'OpenCL': '#2EC4B6',
+        'CUDA': '#8CD600'
+    };
+
+    // Get element IDs
+    const textIDs = ['language1', 'language2', 'language3', 'language4', 'language5'];
+    const barIDs = ['languageBar1', 'languageBar2', 'languageBar3', 'languageBar4', 'languageBar5'];
+
     // Populate with available languages
     languages.slice(0, 5).forEach((lang, i) => {
-        const textEl = document.getElementById(textIds[i]);
-        const barEl = document.getElementById(barIds[i]);
+        const textLang = document.getElementById(textIDs[i]);
+        const barLang = document.getElementById(barIDs[i]);
 
         // When bytes exist but rounding produced 0%, show '<1%' and a small visible bar
         const hasBytes = typeof lang.bytes === 'number' && lang.bytes > 0;
         const barWidth = (lang.percentage === 0 && hasBytes) ? '1' : `${lang.percentage}`;
         const displayPct = barWidth === '1' ? '<1' : lang.percentage;
 
-        if (textEl){
-            textEl.textContent = `${lang.name} — ${displayPct}%`;
-            textEl.style.borderLeft = `8px solid ${colorMap[lang.name] || 'gray'}`;
-            textEl.style.paddingLeft = '16px';
+        if (textLang){
+            textLang.textContent = `${lang.name} — ${displayPct}%`;
+            textLang.style.borderLeft = `8px solid ${colorMap[lang.name] || 'gray'}`;
+            textLang.style.paddingLeft = '16px';
         }
-        if (barEl) {
-            barEl.style.width = barWidth + '%';
-            barEl.style.height = '100%';
-            barEl.style.backgroundColor = colorMap[lang.name] || 'gray';
-            barEl.style.transition = 'width 600ms ease';
+
+        if (barLang) {
+            barLang.style.width = barWidth + '%';
+            barLang.style.height = '100%';
+            barLang.style.backgroundColor = colorMap[lang.name] || 'gray';
+            barLang.style.transition = 'width 600ms ease';
 
             // Tooltip hover text
-            barEl.setAttribute('title', `${lang.name}: ${displayPct}`);
+            barLang.setAttribute('title', `${lang.name}: ${displayPct}%`);
         }
     });
 }
