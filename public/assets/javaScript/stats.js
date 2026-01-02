@@ -53,14 +53,18 @@ function displayGithubStats(data) {
 }
 
 function displayTopLanguages(languages = []) {
-    const textOthers = document.getElementById('others');
+    function applyLangOthers() {
+        const textOthers = document.getElementById('others');
 
-    const languagePercentTotal = languages.reduce((sum, lang) => sum + lang.percentage, 0);
-    const otherLangPercentage = Math.round(100 - languagePercentTotal);
+        const languagePercentTotal = languages.reduce((sum, lang) => sum + lang.percentage, 0);
+        const otherLangPercentage = Math.round(100 - languagePercentTotal);
 
-    textOthers.textContent = `Other — ${otherLangPercentage === 0 ? '<1' : otherLangPercentage}%`;
-    textOthers.style.borderLeft = `8px solid gray`;
-    textOthers.style.paddingLeft = '16px';
+        textOthers.textContent = `Other — ${otherLangPercentage === 0 ? '<1' : otherLangPercentage}%`;
+        textOthers.style.borderLeft = `10px solid gray`;
+        textOthers.style.paddingLeft = '20px';
+    }
+
+    setTimeout(applyLangOthers, 2500);
 
     // Language color map based from Github
     // Some colors are not officially recognized
@@ -100,27 +104,32 @@ function displayTopLanguages(languages = []) {
 
     // Populate with available languages
     languages.slice(0, 5).forEach((lang, i) => {
-        const textLang = document.getElementById(textIDs[i]);
-        const barLang = document.getElementById(barIDs[i]);
+        function applyLangData() {
+            const textLang = document.getElementById(textIDs[i]);
+            const barLang = document.getElementById(barIDs[i]);
 
-        // When bytes exist but rounding produced 0%, show '<1%' and a small visible bar
-        const hasBytes = typeof lang.bytes === 'number' && lang.bytes > 0;
-        const barWidth = (lang.percentage === 0 && hasBytes) ? '1' : `${lang.percentage}`;
-        const displayPct = barWidth === '1' ? '<1' : lang.percentage;
+            // When bytes exist but rounding produced 0%, show '<1%' and a small visible bar
+            const hasBytes = typeof lang.bytes === 'number' && lang.bytes > 0;
+            const barWidth = (lang.percentage === 0 && hasBytes) ? '1' : `${lang.percentage}`;
+            const displayPct = barWidth === '1' ? '<1' : lang.percentage;
 
-        if (textLang){
-            textLang.textContent = `${lang.name} — ${displayPct}%`;
-            textLang.style.borderLeft = `10px solid ${colorMap[lang.name] || 'gray'}`;
-            textLang.style.paddingLeft = '20px';
+            if (textLang){
+                textLang.textContent = `${lang.name} — ${displayPct}%`;
+                textLang.style.borderLeft = `10px solid ${colorMap[lang.name] || 'gray'}`;
+                textLang.style.paddingLeft = '20px';
+            }
+
+            if (barLang) {
+                barLang.style.width = barWidth + '%';
+                barLang.style.backgroundColor = colorMap[lang.name] || 'gray';
+
+                // Tooltip hover text
+                barLang.setAttribute('title', `${lang.name}: ${displayPct}%`);
+            }
         }
 
-        if (barLang) {
-            barLang.style.width = barWidth + '%';
-            barLang.style.backgroundColor = colorMap[lang.name] || 'gray';
-
-            // Tooltip hover text
-            barLang.setAttribute('title', `${lang.name}: ${displayPct}%`);
-        }
+        // Apply after a slight delay for better visual effect
+        setTimeout(applyLangData, i * 500);
     });
 }
 

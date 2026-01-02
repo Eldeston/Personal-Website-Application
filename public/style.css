@@ -110,7 +110,7 @@ main #about .consoleWindow .flexRowWrap {
   place-content: space-between;
 }
 main #about .consoleWindow .flexRowWrap p {
-  transition: padding 1s ease-out, border-color 0.5s ease-out;
+  transition: padding 1s ease-in-out, border-width 1s ease-in-out;
 }
 main #about .consoleWindow #percentageBar {
   width: 100%;
@@ -124,7 +124,7 @@ main #about .consoleWindow #percentageBar {
 main #about .consoleWindow #percentageBar div {
   width: 0;
   height: 100%;
-  transition: width 1s ease-out, background-color 0.5s ease-out;
+  transition: width 1s ease-in-out, background-color 1s ease-in-out;
 }
 main #work #iFrameContainer {
   display: flex;
