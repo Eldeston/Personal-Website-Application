@@ -1,30 +1,26 @@
-@use "sass:map";
-
 /* ---------------- VARIABLES GOES HERE ---------------- */
 
 $debugMode: "false";
 
-$paddingBig: 32px;
-$paddingSmall: 16px;
+$breakpointMobile: 540px;
+$breakpointTablet: 720px;
+$breakpointDesktop: 1024px;
 
-$darkCol: (
-    accent: rgb(0, 110, 255, 1),
-    second: rgba(32, 32, 32, 0.125),
-    third: rgba(0, 0, 0, 0.5)
-);
+$paddingBig: 24px;
+$paddingSmall: 12px;
 
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 
-@function bevelIn($minOpacity: 0.125, $maxOpacity: 0.25) {
+@function bevelIn($minOpacity: 0.125, $maxOpacity: 0.25, $width: 1px) {
     @return
-        -2px 0 0 rgb(255, 255, 255, $minOpacity) inset, 2px 0 0 rgb(0, 0, 0, $maxOpacity) inset,
-        0 -2px 0 rgb(255, 255, 255, $maxOpacity) inset, 0 2px 0 rgb(0, 0, 0, $minOpacity) inset;
+        (0 - $width) 0 0 rgb(255, 255, 255, $minOpacity) inset, $width 0 0 rgb(0, 0, 0, $minOpacity) inset,
+        0 (0 - $width) 0 rgb(255, 255, 255, $maxOpacity) inset, 0 $width 0 rgb(0, 0, 0, $maxOpacity) inset;
 }
 
-@function bevelOut($minOpacity: 0.125, $maxOpacity: 0.25) {
+@function bevelOut($minOpacity: 0.125, $maxOpacity: 0.25, $width: 1px) {
     @return
-        2px 0 0 rgb(255, 255, 255, $minOpacity) inset, -2px 0 0 rgb(0, 0, 0, $maxOpacity) inset,
-        0 2px 0 rgb(255, 255, 255, $maxOpacity) inset, 0 -2px 0 rgb(0, 0, 0, $minOpacity) inset;
+        $width 0 0 rgb(255, 255, 255, $minOpacity) inset, (0 - $width) 0 0 rgb(0, 0, 0, $minOpacity) inset,
+        0 $width 0 rgb(255, 255, 255, $maxOpacity) inset, 0 (0 - $width) 0 rgb(0, 0, 0, $maxOpacity) inset;
 }
 
 /* ---------------- MIXINS GOES HERE ---------------- */
