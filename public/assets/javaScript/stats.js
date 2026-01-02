@@ -110,8 +110,8 @@ function displayTopLanguages(languages = []) {
 
         if (textLang){
             textLang.textContent = `${lang.name} — ${displayPct}%`;
-            textLang.style.borderLeft = `8px solid ${colorMap[lang.name] || 'gray'}`;
-            textLang.style.paddingLeft = '16px';
+            textLang.style.borderLeft = `10px solid ${colorMap[lang.name] || 'gray'}`;
+            textLang.style.paddingLeft = '20px';
         }
 
         if (barLang) {
