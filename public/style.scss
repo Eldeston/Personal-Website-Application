@@ -16,17 +16,9 @@ body {
     place-items: center;
 }
 
-h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
-}
-
-h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-}
-
-h3 {
-    font-size: 1rem;
-}
+h1 { font-size: clamp(1.5rem, 6vw, 3rem); }
+h2 { font-size: clamp(1.25rem, 3vw, 2rem); }
+h3 { font-size: 1rem; }
 
 h1, h2, h3 {
     flex: 0 1 auto;
@@ -51,7 +43,7 @@ header {
     display: flex;
     position: sticky;
     gap: common.$paddingSmall;
-    place-items: flex-start;
+    place-items: center;
     place-content: space-between;
 
     top: 0;
@@ -109,7 +101,7 @@ main {
                 overflow: hidden;
                 background-color: gray;
                 border-radius: common.$paddingSmall;
-
+                
                 div {
                     width: 0;
                     height: 100%;
@@ -119,7 +111,7 @@ main {
         }
     }
 
-    #work {
+    #projects {
         #iFrameContainer {
             @include common.flexRowWrap();
 
@@ -159,16 +151,16 @@ footer section{
     width: 100%;
 }
 
-.iconBig {
-    width: 100px;
-}
-
-.iconMedium {
-    width: 75px;
-}
+.iconBig { width: clamp(100px, 20vw, 200px); }
+.iconMedium { width: clamp(75px, 10vw, 150px); }
 
 .iconSmall {
     width: 50px;
+    transition: 0.5s;
+
+    &:hover {
+        width: 60px;
+    }
 }
 
 #githubPfp {
@@ -212,7 +204,7 @@ footer {
 }
 
 .consoleWindow {
-    @include common.embedStyle(common.$paddingSmall, 0);
+    @include common.embedStyle(common.$paddingBig, 0);
 }
 
 .cursorBlink {
@@ -223,6 +215,7 @@ footer {
 
 // Large Mobile
 @media (min-width: common.$breakpointMobile) {
+
 }
 
 // Tablet
@@ -231,21 +224,14 @@ footer {
         box-shadow: none;
         backdrop-filter: none;
         background-color: transparent;
-        place-items: center;
 
         nav {
             @include common.windowStyle(common.$paddingSmall, 0);
         }
     }
-
-    .iconBig { width: 180px; }
-    .iconMedium { width: 120px; }
-    .iconSmall { width: 60px; }
 }
 
 // Desktop
 @media (min-width: common.$breakpointDesktop) {
-    .iconBig { width: 225px; }
-    .iconMedium { width: 150px; }
-    .iconSmall { width: 75px; }
+
 }

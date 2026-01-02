@@ -55,7 +55,7 @@ $paddingSmall: 12px;
     transition: 0.5s;
 
     &:hover {
-        box-shadow: bevelOut(0.5, 1), 0 0 4px black;
+        box-shadow: bevelOut(0.5, 0.5), 0 0 4px black;
 
         background-color: rgb(0, 110, 255, 1);
     }

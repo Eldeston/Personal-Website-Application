@@ -28,11 +28,11 @@ body {
 }
 
 h1 {
-  font-size: clamp(2rem, 6vw, 3rem);
+  font-size: clamp(1.5rem, 6vw, 3rem);
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
 h3 {
@@ -61,7 +61,7 @@ header {
   display: flex;
   position: sticky;
   gap: 12px;
-  place-items: flex-start;
+  place-items: center;
   place-content: space-between;
   top: 0;
   z-index: 8;
@@ -83,7 +83,7 @@ header a li, header ul li {
   list-style: none;
 }
 header a li:hover, header ul li:hover {
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) inset, -1px 0 0 rgba(0, 0, 0, 0.5) inset, 0 1px 0 rgb(255, 255, 255) inset, 0 -1px 0 rgb(0, 0, 0) inset, 0 0 4px black;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) inset, -1px 0 0 rgba(0, 0, 0, 0.5) inset, 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px black;
   background-color: rgb(0, 110, 255);
 }
 header a li:active, header ul li:active {
@@ -126,13 +126,13 @@ main #about .consoleWindow #percentageBar div {
   height: 100%;
   transition: width 1s ease-in-out, background-color 1s ease-in-out;
 }
-main #work #iFrameContainer {
+main #projects #iFrameContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 0;
   place-content: center;
 }
-main #work #iFrameContainer iFrame {
+main #projects #iFrameContainer iFrame {
   width: 480px;
   aspect-ratio: 16/9;
 }
@@ -166,15 +166,19 @@ footer section {
 }
 
 .iconBig {
-  width: 100px;
+  width: clamp(100px, 20vw, 200px);
 }
 
 .iconMedium {
-  width: 75px;
+  width: clamp(75px, 10vw, 150px);
 }
 
 .iconSmall {
   width: 50px;
+  transition: 0.5s;
+}
+.iconSmall:hover {
+  width: 60px;
 }
 
 #githubPfp {
@@ -230,7 +234,7 @@ footer {
   box-shadow: -1px 0 0 rgba(255, 255, 255, 0.125) inset, 1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black inset;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 8px;
-  padding: 12px;
+  padding: 24px;
   margin: 0;
 }
 
@@ -245,7 +249,6 @@ footer {
     -webkit-backdrop-filter: none;
             backdrop-filter: none;
     background-color: transparent;
-    place-items: center;
   }
   header nav {
     box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
@@ -255,25 +258,5 @@ footer {
     border-radius: 8px;
     padding: 12px;
     margin: 0;
-  }
-  .iconBig {
-    width: 180px;
-  }
-  .iconMedium {
-    width: 120px;
-  }
-  .iconSmall {
-    width: 60px;
-  }
-}
-@media (min-width: 1024px) {
-  .iconBig {
-    width: 225px;
-  }
-  .iconMedium {
-    width: 150px;
-  }
-  .iconSmall {
-    width: 75px;
   }
 }/*# sourceMappingURL=style.css.map */
