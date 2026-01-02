@@ -118,7 +118,7 @@ function displayTopLanguages(languages = []) {
             barLang.style.width = barWidth + '%';
             barLang.style.height = '100%';
             barLang.style.backgroundColor = colorMap[lang.name] || 'gray';
-            barLang.style.transition = 'width 600ms ease';
+            barLang.style.transition = 'all 600ms ease';
 
             // Tooltip hover text
             barLang.setAttribute('title', `${lang.name}: ${displayPct}%`);
