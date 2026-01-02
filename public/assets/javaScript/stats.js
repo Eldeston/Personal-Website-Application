@@ -47,6 +47,63 @@ function displayGithubStats(data) {
     userJoin.innerHTML = `🗓️ Joined: ${data.created_at}`;
     userRepos.innerHTML = `📦 Repositories: ${data.public_repos}`;
     userGists.innerHTML = `📄 Gists: ${data.public_gists}`;
+
+    // Update top languages display (fallback to 'Other' when none available)
+    displayTopLanguages(data.languages || []);
+}
+
+function displayTopLanguages(languages = []) {
+    const textIds = ['language1', 'language2', 'language3', 'language4', 'language5'];
+    const barIds = ['languageBar1', 'languageBar2', 'languageBar3', 'languageBar4', 'languageBar5'];
+
+    const colorMap = {
+        'JavaScript': '#f1e05a',
+        'TypeScript': '#2b7489',
+        'Python': '#3572A5',
+        'CSS': '#563d7c',
+        'HTML': '#e34c26',
+        'Java': '#b07219',
+        'C++': '#f34b7d',
+        'C#': '#178600',
+        'Shell': '#89e051',
+        'PHP': '#4F5D95',
+        'Go': '#00ADD8'
+    };
+    
+    const textOthers = document.getElementById('others');
+
+    const languagePercentTotal = languages.reduce((sum, lang) => sum + lang.percentage, 0);
+    const otherLangPercentage = Math.round(100 - languagePercentTotal);
+
+    textOthers.textContent = `Other — ${otherLangPercentage === 0 ? '<1' : otherLangPercentage}%`;
+    textOthers.style.borderLeft = `8px solid gray`;
+    textOthers.style.paddingLeft = '16px';
+
+    // Populate with available languages
+    languages.slice(0, 5).forEach((lang, i) => {
+        const textEl = document.getElementById(textIds[i]);
+        const barEl = document.getElementById(barIds[i]);
+
+        // When bytes exist but rounding produced 0%, show '<1%' and a small visible bar
+        const hasBytes = typeof lang.bytes === 'number' && lang.bytes > 0;
+        const barWidth = (lang.percentage === 0 && hasBytes) ? '1' : `${lang.percentage}`;
+        const displayPct = barWidth === '1' ? '<1' : lang.percentage;
+
+        if (textEl){
+            textEl.textContent = `${lang.name} — ${displayPct}%`;
+            textEl.style.borderLeft = `8px solid ${colorMap[lang.name] || 'gray'}`;
+            textEl.style.paddingLeft = '16px';
+        }
+        if (barEl) {
+            barEl.style.width = barWidth + '%';
+            barEl.style.height = '100%';
+            barEl.style.backgroundColor = colorMap[lang.name] || 'gray';
+            barEl.style.transition = 'width 600ms ease';
+
+            // Tooltip hover text
+            barEl.setAttribute('title', `${lang.name}: ${displayPct}`);
+        }
+    });
 }
 
 async function fetchGithubStats(username) {
@@ -61,8 +118,10 @@ async function fetchGithubStats(username) {
 
         // Display the data (example)
         displayGithubStats(data);
+        return data;
     } catch(error) {
         console.error('Error fetching GitHub stats:', error);
+        throw error;
     }
 }
 

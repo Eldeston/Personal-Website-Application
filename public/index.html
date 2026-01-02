@@ -23,10 +23,12 @@
 
             <!-- Navigation Bar -->
             <nav>
-                <a href="#">🏠 Home</a>
-                <a href="#work">📦 Projects</a>
-                <a href="#tools">🛠️ Tools</a>
-                <a href="#subscribe">❤️ Subscribe</a>
+                <ul>
+                    <li><a href="#">🏠 Home</a></li>
+                    <li><a href="#work">📦 Projects</a></li>
+                    <li><a href="#tools">🛠️ Tools</a></li>
+                    <li><a href="#subscribe">❤️ Subscribe</a></li>
+                </ul>
             </nav>
         </header>
 
@@ -47,39 +49,69 @@
 
             <!-- About Me -->
             <article id="about">
-                <h2><span class="typing">📗 About Me</span><span class="cursorBlink">_</span></h1>
-                <p>I'm a self-taught software developer who creates content for fun. I founded FlameRender© Studios and maintained leadership and have developed projects under my studio. I develop with optimization, documentation, and formatting in mind for all my work.</p>
-                <p>Most of my work revolve around Minecraft and software development, but I aim to participate and/or branch out to other areas particularly in graphics programming. Fun fact, this background is powered by p5.js, a render of an optimized flow field with over 4000 particles.</p>
+                <h2><span class="typing">📗 About Me</span><span class="cursorBlink">_</span></h2>
+                <p>I'm a self-taught developer and founder of FlameRender© Studios, creating optimized and well‑documented software.</p>
+                <p>I mainly work on Minecraft‑related projects and software development, and I'm expanding into graphics programming. The background is a p5.js flow field with 4000+ particles.</p>
 
                 <h2><span class="typing">🖥️ Github Stats</span><span class="cursorBlink">_</span></h2>
                 <div class="consoleWindow">
-                    <div>
-                        <h2>👨‍🎓 Eldeston</h2>
-                        <p id="userFollows">👥 Followers: loading...</p>
-                        <p id="userStars">⭐ Stars: loading...</p>
-                        <p id="userForks">🍴 Forks: loading...</p>
+                    <h2>👨‍🎓 Eldeston</h2>
+                    <!-- <h2><a href="https://github.com/Eldeston">👉 View Profile</a></h2> -->
+
+                    <div class="flexRowWrap">
+                        <div>
+                            <p id="userFollows">👥 Followers: loading...</p>
+                            <p id="userStars">⭐ Stars: loading...</p>
+                            <p id="userForks">🍴 Forks: loading...</p>
+                        </div>
+
+                        <div>
+                            <p id="userJoin">🗓️ Joined: loading...</p>
+                            <p id="userRepos">📦 Repositories: loading...</p>
+                            <p id="userGists">📄 Gists: loading...</p>
+                        </div>
                     </div>
 
-                    <div>
-                        <h2><a href="https://github.com/Eldeston">👉 View Profile</a></h2>
-                        <p id="userJoin">🗓️ Joined: loading...</p>
-                        <p id="userRepos">📦 Repositories: loading...</p>
-                        <p id="userGists">📄 Gists: loading...</p>
+                    <h2>🔢 Top 5 Languages</h2>
+
+                    <div class="flexRowWrap">
+                        <div>
+                            <p id="language1">Loading...</p>
+                            <p id="language2">Loading...</p>
+                            <p id="language3">Loading...</p>
+                        </div>
+
+                        <div>
+                            <p id="language4">Loading...</p>
+                            <p id="language5">Loading...</p>
+                            <p id="others">Loading...</p>
+                        </div>
+                    </div>
+
+                    <div id="percentageBar">
+                        <div id="languageBar1"></div>
+                        <div id="languageBar2"></div>
+                        <div id="languageBar3"></div>
+                        <div id="languageBar4"></div>
+                        <div id="languageBar5"></div>
+                        <div id="othersBar"></div>
                     </div>
                 </div>
 
                 <h2><span class="typing">🌐 Discord Stats</span><span class="cursorBlink">_</span></h2>
                 <div class="consoleWindow">
-                    <div>
-                        <h2>🤖 FlameBot</h2>
-                        <p id="botCreation">🗓️ Created: loading...</p>
-                        <p id="botStatus">⚙️ Status: loading...</p>
-                    </div>
+                    <div class="flexRowWrap">
+                        <div>
+                            <h2>🤖 FlameBot</h2>
+                            <p id="botCreation">🗓️ Created: loading...</p>
+                            <p id="botStatus">⚙️ Status: loading...</p>
+                        </div>
 
-                    <div>
-                        <h2>🏛️ FlameRender™ Studios</h2>
-                        <p id="serverCount">👥 Member Count: loading...</p>
-                        <p id="serverOnline">🟢 Online Count: loading...</p>
+                        <div>
+                            <h2>🏛️ FlameRender™ Studios</h2>
+                            <p id="serverCount">👥 Member Count: loading...</p>
+                            <p id="serverOnline">🟢 Online Count: loading...</p>
+                        </div>
                     </div>
                 </div>
             </article>

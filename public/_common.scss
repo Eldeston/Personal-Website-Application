@@ -1,21 +1,36 @@
+@use "sass:map";
+
 /* ---------------- VARIABLES GOES HERE ---------------- */
 
-$debugMode: false;
-
-$colMain: #0066ff;
-$colSecondary: #00ff00;
-$colTertiary: #ff6600;
+$debugMode: "false";
 
 $paddingBig: 32px;
 $paddingSmall: 16px;
 
+$darkCol: (
+    accent: rgb(0, 110, 255, 1),
+    second: rgba(32, 32, 32, 0.125),
+    third: rgba(0, 0, 0, 0.5)
+);
+
+/* ---------------- FUNCTIONS GOES HERE ---------------- */
+
+@function bevelIn($minOpacity: 0.125, $maxOpacity: 0.25) {
+    @return
+        -2px 0 0 rgb(255, 255, 255, $minOpacity) inset, 2px 0 0 rgb(0, 0, 0, $maxOpacity) inset,
+        0 -2px 0 rgb(255, 255, 255, $maxOpacity) inset, 0 2px 0 rgb(0, 0, 0, $minOpacity) inset;
+}
+
+@function bevelOut($minOpacity: 0.125, $maxOpacity: 0.25) {
+    @return
+        2px 0 0 rgb(255, 255, 255, $minOpacity) inset, -2px 0 0 rgb(0, 0, 0, $maxOpacity) inset,
+        0 2px 0 rgb(255, 255, 255, $maxOpacity) inset, 0 -2px 0 rgb(0, 0, 0, $minOpacity) inset;
+}
+
 /* ---------------- MIXINS GOES HERE ---------------- */
 
 @mixin windowStyle($windowPadding, $windowMargin) {
-    box-shadow:
-        2px 0 0 rgb(255, 255, 255, 0.125) inset, -2px 0 0 rgb(0, 0, 0, 0.125) inset,
-        0 2px 0 rgb(255, 255, 255, 0.25) inset, 0 -2px 0 rgb(0, 0, 0, 0.25) inset,
-        0 0 4px black;
+    box-shadow: bevelOut(), 0 0 4px black;
 
     background-color: rgba(32, 32, 32, 0.125);
     backdrop-filter: blur(16px);
@@ -26,10 +41,7 @@ $paddingSmall: 16px;
 }
 
 @mixin embedStyle($windowPadding, $windowMargin) {
-    box-shadow:
-        -2px 0 0 rgb(255, 255, 255, 0.125) inset, 2px 0 0 rgb(0, 0, 0, 0.125) inset,
-        0 -2px 0 rgb(255, 255, 255, 0.25) inset, 0 2px 0 rgb(0, 0, 0, 0.25) inset,
-        0 0 4px black inset;
+    box-shadow: bevelIn(), 0 0 4px black inset;
 
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 8px;
@@ -38,13 +50,34 @@ $paddingSmall: 16px;
     margin: $windowMargin;
 }
 
+@mixin buttonStyle($windowPadding, $windowMargin) {
+    border-radius: 8px;
+
+    padding: $windowPadding;
+    margin: $windowMargin;
+
+    transition: 0.5s;
+
+    &:hover {
+        box-shadow: bevelOut(0.5, 1), 0 0 4px black;
+
+        background-color: rgb(0, 110, 255, 1);
+    }
+
+    &:active {
+        box-shadow: bevelIn(0.25, 0.5), 0 0 4px black inset;
+        
+        background-color: rgb(0, 55, 128, 1);
+    }
+}
+
 @mixin flexRowWrap($gap: 0) {
     display: flex;
     flex-wrap: wrap;
     gap: $gap;
 }
 
-// helper: produce N nested levels
+// Recusive helper: produce N nested levels
 @mixin _debugLevel($current, $max, $hueStart, $hueStep, $width) {
     @if $current <= $max {
         > * {
@@ -54,9 +87,9 @@ $paddingSmall: 16px;
     }
 }
 
-// public mixin: checks $debugMode inside and accepts adjustable steps
+// Public mixin: checks $debugMode inside and accepts adjustable steps
 @mixin debugStyle($levels: 5, $hueStart: 0, $hueStep: 72, $width: 2px) {
-    @if $debugMode == true {
+    @if $debugMode == "true" {
         @include _debugLevel(1, $levels, $hueStart, $hueStep, $width);
     }
 }

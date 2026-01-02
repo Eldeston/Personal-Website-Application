@@ -25,12 +25,41 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Login through provided tokens
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
 
+async function getTopLanguages(username, limit = 5) {
+    // Fetch repositories and aggregate language bytes
+    const repositoryData = await octokit.paginate(octokit.repos.listForUser, { username, per_page: 100 });
+
+    const languageResponses = await Promise.allSettled(
+        repositoryData.map(r => octokit.repos.listLanguages({ owner: username, repo: r.name }))
+    );
+
+    const languageTotals = {};
+    for (const res of languageResponses) {
+        if (res.status === 'fulfilled' && res.value && res.value.data) {
+            for (const [lang, bytes] of Object.entries(res.value.data)) {
+                languageTotals[lang] = (languageTotals[lang] || 0) + bytes;
+            }
+        }
+    }
+
+    const totalBytes = Object.values(languageTotals).reduce((s, v) => s + v, 0);
+    const languagesArray = Object.entries(languageTotals)
+        .map(([name, bytes]) => ({ name, bytes }))
+        .sort((a, b) => b.bytes - a.bytes);
+
+    return languagesArray.slice(0, limit).map(({ name, bytes }) => ({
+        name,
+        bytes,
+        percentage: totalBytes ? Math.round((bytes / totalBytes) * 100) : 0
+    }));
+}
+
 app.get("/github", async (request, result) => {
     console.log('Connected to "/github"');
 
     const username = request.query.username;
 
-    if(!username) return result.status(400).json({ error: "username query param required" });
+    if (!username) return result.status(400).json({ error: "username query param required" });
 
     try {
         const userData = await octokit.users.getByUsername({ username });
@@ -38,6 +67,8 @@ app.get("/github", async (request, result) => {
 
         const totalStars = repositoryData.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
         const totalForks = repositoryData.reduce((sum, r) => sum + (r.forks_count || 0), 0);
+
+        const topLanguages = await getTopLanguages(username, 5);
 
         result.json({
             login: userData.data.login,
@@ -50,9 +81,10 @@ app.get("/github", async (request, result) => {
             public_gists: userData.data.public_gists,
             created_at: userData.data.created_at,
             total_stars: totalStars,
-            total_forks: totalForks
+            total_forks: totalForks,
+            languages: topLanguages
         });
-    } catch(error) {
+    } catch (error) {
         result.status(500).json({ error: error.message });
     }
 });
@@ -69,7 +101,7 @@ const discordClient = new Client({
 });
 
 // Login with token
-if(process.env.DISCORD_TOKEN) {
+if (process.env.DISCORD_TOKEN) {
     discordClient.login(process.env.DISCORD_TOKEN)
         .then(() => console.log("Discord bot logged in"))
         .catch(error => console.error("Discord login error:", error.message));
@@ -80,12 +112,12 @@ if(process.env.DISCORD_TOKEN) {
 app.get("/discord", async (request, result) => {
     console.log('Connected to "/discord"');
 
-    if(!discordClient.isReady()) return result.status(503).json({ error: "Discord client not ready" });
+    if (!discordClient.isReady()) return result.status(503).json({ error: "Discord client not ready" });
 
     try {
         const botUser = discordClient.user;
         const guild = discordClient.guilds.cache.get(request.query.guildId);
-        if(!guild) return result.status(400).json({ error: "Invalid or missing guildId" });
+        if (!guild) return result.status(400).json({ error: "Invalid or missing guildId" });
 
         // Make sure members are cached
         await guild.members.fetch();
