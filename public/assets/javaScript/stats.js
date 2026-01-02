@@ -112,13 +112,14 @@ function displayTopLanguages(languages = []) {
             textLang.textContent = `${lang.name} — ${displayPct}%`;
             textLang.style.borderLeft = `8px solid ${colorMap[lang.name] || 'gray'}`;
             textLang.style.paddingLeft = '16px';
+            barLang.style.transition = 'padding 0.5s ease, border-opacity 0.25s ease';
         }
 
         if (barLang) {
             barLang.style.width = barWidth + '%';
             barLang.style.height = '100%';
             barLang.style.backgroundColor = colorMap[lang.name] || 'gray';
-            barLang.style.transition = 'all 600ms ease';
+            barLang.style.transition = 'width 0.5s ease, opacity 0.25s ease';
 
             // Tooltip hover text
             barLang.setAttribute('title', `${lang.name}: ${displayPct}%`);
