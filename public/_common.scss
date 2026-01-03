@@ -6,8 +6,9 @@ $breakpointMobile: 540px;
 $breakpointTablet: 720px;
 $breakpointDesktop: 1024px;
 
-$paddingBig: 24px;
-$paddingSmall: 12px;
+$paddingBig: 2rem;
+$paddingMedium: 1rem;
+$paddingSmall: 0.5rem;
 
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 
@@ -23,7 +24,29 @@ $paddingSmall: 12px;
         0 $width 0 rgb(255, 255, 255, $maxOpacity) inset, 0 (0 - $width) 0 rgb(0, 0, 0, $maxOpacity) inset;
 }
 
+@function bevelOutTB($minOpacity: 0.125, $maxOpacity: 0.25, $width: 1px) {
+    @return
+        0 $width 0 rgb(255, 255, 255, $maxOpacity) inset, 0 (0 - $width) 0 rgb(0, 0, 0, $maxOpacity) inset;
+}
+
 /* ---------------- MIXINS GOES HERE ---------------- */
+
+@mixin boxSize($width: auto, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+@mixin boxBorder($padding: 0, $margin: 0, $border: none) {
+    padding: $padding;
+    margin: $margin;
+    border: $border;
+}
+
+@mixin flexRowWrap($gap: 0) {
+    display: flex;
+    flex-flow: row wrap;
+    gap: $gap;
+}
 
 @mixin windowStyle($windowPadding, $windowMargin) {
     box-shadow: bevelOut(), 0 0 4px black;
@@ -56,21 +79,13 @@ $paddingSmall: 12px;
 
     &:hover {
         box-shadow: bevelOut(0.5, 0.5), 0 0 4px black;
-
         background-color: rgb(0, 110, 255, 1);
     }
 
     &:active {
         box-shadow: bevelIn(0.25, 0.5), 0 0 4px black inset;
-        
         background-color: rgb(0, 55, 128, 1);
     }
-}
-
-@mixin flexRowWrap($gap: 0) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap;
 }
 
 // Recusive helper: produce N nested levels
@@ -94,13 +109,8 @@ $paddingSmall: 12px;
 
 /* Smoothes the blinking cursor */
 @keyframes alphaAnim {
-    from {
-        opacity: 0%;
-    }
-
-    to {
-        opacity: 100%;
-    }
+    from { opacity: 0%; }
+    to { opacity: 100%; }
 }
 
 /* ---------------- IMPORTS GOES HERE ---------------- */

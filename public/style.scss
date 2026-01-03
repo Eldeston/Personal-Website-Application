@@ -1,3 +1,12 @@
+/*
+
+The order of selectors follows:
+Semantic, IDs, and classes
+
+For rules, the order follows:
+Layout, styling, and responsive
+*/
+
 /* ---------------- USE GOES HERE ---------------- */
 
 @use "common.scss" as common;
@@ -11,9 +20,15 @@ html, body {
 }
 
 body {
+    @include common.debugStyle();
+
     display: flex;
     flex-direction: column;
     place-items: center;
+
+    font-family: 'JetBrains Mono';
+    color: white;
+    background-color: black;
 }
 
 h1 { font-size: clamp(1.5rem, 6vw, 3rem); }
@@ -29,17 +44,16 @@ a {
     color: white;
 }
 
-iframe {
-    // Remove the default border used by iframe
-    border: none;
-}
+iframe { border: none; }
 
 header, main, footer {
     box-sizing: border-box;
-    width: min(100%, 1024px);
+    width: min(100%, common.$breakpointDesktop);
 }
 
 header {
+    @include common.windowStyle(common.$paddingSmall, 0);
+
     display: flex;
     position: sticky;
     gap: common.$paddingSmall;
@@ -52,7 +66,7 @@ header {
     nav {
         @include common.flexRowWrap(common.$paddingSmall);
 
-        gap: common.$paddingSmall;
+        gap: common.$paddingMedium;
     }
 
     a, ul {
@@ -62,6 +76,16 @@ header {
             @include common.buttonStyle(common.$paddingSmall, 0);
 
             list-style: none;
+        }
+    }
+
+    @media (min-width: common.$breakpointTablet) {
+        box-shadow: none;
+        backdrop-filter: none;
+        background-color: transparent;
+
+        nav {
+            @include common.windowStyle(common.$paddingMedium, 0);
         }
     }
 }
@@ -79,8 +103,14 @@ main {
         }
     }
 
+    article {
+        @include common.windowStyle(common.$paddingMedium, 16px 0);
+    }
+
     #about {
         .consoleWindow {
+            @include common.embedStyle(common.$paddingMedium, 0);
+
             .flexRowWrap {
                 @include common.flexRowWrap();
 
@@ -95,7 +125,7 @@ main {
             #percentageBar {
                 width: 100%;
                 height: common.$paddingSmall;
-                margin: common.$paddingBig 0;
+                margin: common.$paddingMedium 0;
 
                 display: flex;
                 overflow: hidden;
@@ -117,7 +147,7 @@ main {
 
             place-content: center;
 
-            iFrame {
+            iframe {
                 width: 480px;
                 aspect-ratio: 16 / 9;
             }
@@ -125,10 +155,18 @@ main {
     }
 }
 
-footer section{
-    @include common.flexRowWrap(common.$paddingSmall);
+footer {
+    @include common.windowStyle(common.$paddingMedium, 0);
 
-    place-content: space-between;
+    section {
+        @include common.flexRowWrap(common.$paddingSmall);
+
+        place-content: space-between;
+    }
+}
+
+.cursorBlink {
+    animation: alphaAnim 1s infinite;
 }
 
 .griddy {
@@ -147,8 +185,9 @@ footer section{
     }
 }
 
-.fillWidth {
+.imageFillWidth {
     width: 100%;
+    height: auto;
 }
 
 .iconBig { width: clamp(100px, 20vw, 200px); }
@@ -177,61 +216,4 @@ footer section{
     z-index: -1;
     // Keep background sticky
     position: fixed;
-}
-
-/* ---------------- STYLING GOES HERE ---------------- */
-
-body {
-    font-family: 'JetBrains Mono';
-    color: white;
-    background-color: black;
-
-    @include common.debugStyle();
-}
-
-header {
-    @include common.windowStyle(common.$paddingSmall, 0);
-}
-
-main {
-    article {
-        @include common.windowStyle(common.$paddingBig, 16px 0);
-    }
-}
-
-footer {
-    @include common.windowStyle(common.$paddingBig, 0);
-}
-
-.consoleWindow {
-    @include common.embedStyle(common.$paddingBig, 0);
-}
-
-.cursorBlink {
-    animation: alphaAnim 1s infinite;
-}
-
-/* ---------------- RESPONSIVE GOES HERE ---------------- */
-
-// Large Mobile
-@media (min-width: common.$breakpointMobile) {
-
-}
-
-// Tablet
-@media (min-width: common.$breakpointTablet) {
-    header {
-        box-shadow: none;
-        backdrop-filter: none;
-        background-color: transparent;
-
-        nav {
-            @include common.windowStyle(common.$paddingSmall, 0);
-        }
-    }
-}
-
-// Desktop
-@media (min-width: common.$breakpointDesktop) {
-
 }

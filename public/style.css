@@ -1,3 +1,11 @@
+/*
+
+The order of selectors follows:
+Semantic, IDs, and classes
+
+For rules, the order follows:
+Layout, styling, and responsive
+*/
 /* ---------------- USE GOES HERE ---------------- */
 /* ---------------- VARIABLES GOES HERE ---------------- */
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
@@ -25,6 +33,9 @@ body {
   display: flex;
   flex-direction: column;
   place-items: center;
+  font-family: "JetBrains Mono";
+  color: white;
+  background-color: black;
 }
 
 h1 {
@@ -58,9 +69,16 @@ header, main, footer {
 }
 
 header {
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(32, 32, 32, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0;
   display: flex;
   position: sticky;
-  gap: 12px;
+  gap: 0.5rem;
   place-items: center;
   place-content: space-between;
   top: 0;
@@ -68,16 +86,16 @@ header {
 }
 header nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  gap: 12px;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+  gap: 1rem;
 }
 header a, header ul {
   display: contents;
 }
 header a li, header ul li {
   border-radius: 8px;
-  padding: 12px;
+  padding: 0.5rem;
   margin: 0;
   transition: 0.5s;
   list-style: none;
@@ -90,11 +108,28 @@ header a li:active, header ul li:active {
   box-shadow: -1px 0 0 rgba(255, 255, 255, 0.25) inset, 1px 0 0 rgba(0, 0, 0, 0.25) inset, 0 -1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px black inset;
   background-color: rgb(0, 55, 128);
 }
+@media (min-width: 720px) {
+  header {
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+    background-color: transparent;
+  }
+  header nav {
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+    background-color: rgba(32, 32, 32, 0.125);
+    -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0;
+  }
+}
 
 main section {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-flow: row wrap;
+  gap: 0.5rem;
   padding: 128px 0;
   place-items: center;
   place-content: center;
@@ -102,11 +137,27 @@ main section {
 main section #heroHeader {
   text-align: center;
 }
+main article {
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(32, 32, 32, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 16px 0;
+}
+main #about .consoleWindow {
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.125) inset, 1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black inset;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+}
 main #about .consoleWindow .flexRowWrap {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   gap: 0;
-  gap: 12px;
+  gap: 0.5rem;
   place-content: space-between;
 }
 main #about .consoleWindow .flexRowWrap p {
@@ -114,12 +165,12 @@ main #about .consoleWindow .flexRowWrap p {
 }
 main #about .consoleWindow #percentageBar {
   width: 100%;
-  height: 12px;
-  margin: 24px 0;
+  height: 0.5rem;
+  margin: 1rem 0;
   display: flex;
   overflow: hidden;
   background-color: gray;
-  border-radius: 12px;
+  border-radius: 0.5rem;
 }
 main #about .consoleWindow #percentageBar div {
   width: 0;
@@ -128,41 +179,55 @@ main #about .consoleWindow #percentageBar div {
 }
 main #projects #iFrameContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   gap: 0;
   place-content: center;
 }
-main #projects #iFrameContainer iFrame {
+main #projects #iFrameContainer iframe {
   width: 480px;
   aspect-ratio: 16/9;
 }
 
+footer {
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  background-color: rgba(32, 32, 32, 0.125);
+  -webkit-backdrop-filter: blur(16px);
+          backdrop-filter: blur(16px);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0;
+}
 footer section {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-flow: row wrap;
+  gap: 0.5rem;
   place-content: space-between;
+}
+
+.cursorBlink {
+  animation: alphaAnim 1s infinite;
 }
 
 .griddy {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-flow: row wrap;
+  gap: 0.5rem;
   place-content: space-evenly;
 }
 
 .iconDisplay {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-flow: row wrap;
+  gap: 0.5rem;
   place-content: space-around;
 }
 .iconDisplay .iconDisplayHeader {
   place-content: center;
 }
 
-.fillWidth {
+.imageFillWidth {
   width: 100%;
+  height: auto;
 }
 
 .iconBig {
@@ -191,72 +256,4 @@ footer section {
   height: 100vh;
   z-index: -1;
   position: fixed;
-}
-
-/* ---------------- STYLING GOES HERE ---------------- */
-body {
-  font-family: "JetBrains Mono";
-  color: white;
-  background-color: black;
-}
-
-header {
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
-  background-color: rgba(32, 32, 32, 0.125);
-  -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-  border-radius: 8px;
-  padding: 12px;
-  margin: 0;
-}
-
-main article {
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
-  background-color: rgba(32, 32, 32, 0.125);
-  -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 16px 0;
-}
-
-footer {
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
-  background-color: rgba(32, 32, 32, 0.125);
-  -webkit-backdrop-filter: blur(16px);
-          backdrop-filter: blur(16px);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 0;
-}
-
-.consoleWindow {
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.125) inset, 1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black inset;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 0;
-}
-
-.cursorBlink {
-  animation: alphaAnim 1s infinite;
-}
-
-/* ---------------- RESPONSIVE GOES HERE ---------------- */
-@media (min-width: 720px) {
-  header {
-    box-shadow: none;
-    -webkit-backdrop-filter: none;
-            backdrop-filter: none;
-    background-color: transparent;
-  }
-  header nav {
-    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
-    background-color: rgba(32, 32, 32, 0.125);
-    -webkit-backdrop-filter: blur(16px);
-            backdrop-filter: blur(16px);
-    border-radius: 8px;
-    padding: 12px;
-    margin: 0;
-  }
 }/*# sourceMappingURL=style.css.map */
