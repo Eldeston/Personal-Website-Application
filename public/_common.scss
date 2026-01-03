@@ -48,33 +48,8 @@ $paddingSmall: 0.5rem;
     gap: $gap;
 }
 
-@mixin windowStyle($windowPadding, $windowMargin) {
-    box-shadow: bevelOut(), 0 0 4px black;
-
-    background-color: rgba(32, 32, 32, 0.125);
-    backdrop-filter: blur(16px);
+@mixin buttonStyle() {
     border-radius: 8px;
-
-    padding: $windowPadding;
-    margin: $windowMargin;
-}
-
-@mixin embedStyle($windowPadding, $windowMargin) {
-    box-shadow: bevelIn(), 0 0 4px black inset;
-
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-
-    padding: $windowPadding;
-    margin: $windowMargin;
-}
-
-@mixin buttonStyle($windowPadding, $windowMargin) {
-    border-radius: 8px;
-
-    padding: $windowPadding;
-    margin: $windowMargin;
-
     transition: 0.5s;
 
     &:hover {

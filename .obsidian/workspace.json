@@ -4,17 +4,31 @@
     "type": "split",
     "children": [
       {
-        "id": "bda42bf335d9cbf7",
+        "id": "5cf61ecb1cd35dac",
         "type": "tabs",
         "children": [
           {
-            "id": "8b38a47a9fb73cf0",
+            "id": "de10771c474b36d4",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "README"
             }
           }
         ]
@@ -199,7 +213,7 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "8b38a47a9fb73cf0",
+  "active": "de10771c474b36d4",
   "lastOpenFiles": [
     "TEMP.md",
     "TEMP 2.md",

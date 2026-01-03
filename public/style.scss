@@ -52,16 +52,21 @@ header, main, footer {
 }
 
 header {
-    @include common.windowStyle(common.$paddingSmall, 0);
+    @include common.flexRowWrap(common.$paddingSmall);
+    @include common.boxBorder(common.$paddingSmall);
 
-    display: flex;
+    box-shadow: common.bevelOutTB(), 0 0 4px black;
+    border-radius: 8px;
+
+    background-color: rgba(32, 32, 32, 0.125);
+    backdrop-filter: blur(16px);
+
     position: sticky;
-    gap: common.$paddingSmall;
     place-items: center;
     place-content: space-between;
 
     top: 0;
-    z-index: 8;
+    z-index: 10;
 
     nav {
         @include common.flexRowWrap(common.$paddingSmall);
@@ -73,7 +78,8 @@ header {
         display: contents;
 
         li {
-            @include common.buttonStyle(common.$paddingSmall, 0);
+            @include common.boxBorder(common.$paddingSmall);
+            @include common.buttonStyle();
 
             list-style: none;
         }
@@ -85,12 +91,22 @@ header {
         background-color: transparent;
 
         nav {
-            @include common.windowStyle(common.$paddingMedium, 0);
+            @include common.boxBorder(common.$paddingMedium);
+
+            box-shadow: common.bevelOut(), 0 0 4px black;
+            border-radius: 8px;
+
+            background-color: rgba(32, 32, 32, 0.125);
+            backdrop-filter: blur(16px);
         }
     }
 }
 
 main {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: common.$paddingBig;
+
     section {
         @include common.flexRowWrap(common.$paddingSmall);
 
@@ -104,12 +120,26 @@ main {
     }
 
     article {
-        @include common.windowStyle(common.$paddingMedium, 16px 0);
+        @include common.boxBorder(common.$paddingMedium);
+
+        box-shadow: common.bevelOutTB(), 0 0 4px black;
+
+        background-color: rgba(32, 32, 32, 0.125);
+        backdrop-filter: blur(16px);
+
+        @media (min-width: common.$breakpointDesktop) {
+            box-shadow: common.bevelOut(), 0 0 4px black;
+            border-radius: 8px;
+        }
     }
 
     #about {
         .consoleWindow {
-            @include common.embedStyle(common.$paddingMedium, 0);
+            @include common.boxBorder(common.$paddingMedium, 0);
+
+            box-shadow: bevelIn(), 0 0 4px black inset;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
 
             .flexRowWrap {
                 @include common.flexRowWrap();
@@ -156,13 +186,27 @@ main {
 }
 
 footer {
-    @include common.windowStyle(common.$paddingMedium, 0);
+    @include common.boxBorder(common.$paddingMedium, common.$paddingBig 0 0 0);
+
+    box-shadow: common.bevelOutTB(), 0 0 4px black;
+
+    background-color: rgba(32, 32, 32, 0.125);
+    backdrop-filter: blur(16px);
 
     section {
         @include common.flexRowWrap(common.$paddingSmall);
 
         place-content: space-between;
     }
+
+    @media (min-width: common.$breakpointDesktop) {
+        box-shadow: common.bevelOut(), 0 0 4px black;
+        border-radius: 8px;
+    }
+}
+
+.imageFillWidth {
+    width: 100%;
 }
 
 .cursorBlink {
@@ -176,26 +220,21 @@ footer {
 }
 
 .iconDisplay {
-    @include common.flexRowWrap(common.$paddingSmall);
+    @include common.flexRowWrap(common.$paddingBig);
 
-    place-content: space-around;
+    place-content: center;
 
     .iconDisplayHeader {
         place-content: center;
     }
 }
 
-.imageFillWidth {
-    width: 100%;
-    height: auto;
-}
-
 .iconBig { width: clamp(100px, 20vw, 200px); }
-.iconMedium { width: clamp(75px, 10vw, 150px); }
+.iconMedium { width: clamp(75px, 10vw, 100px); }
 
 .iconSmall {
     width: 50px;
-    transition: 0.5s;
+    transition: 0.25s;
 
     &:hover {
         width: 60px;
