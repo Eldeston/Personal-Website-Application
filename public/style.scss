@@ -56,10 +56,9 @@ header {
     @include common.boxBorder(common.$paddingSmall);
 
     box-shadow: common.bevelOutTB(), 0 0 4px black;
-    border-radius: 8px;
 
-    background-color: rgba(32, 32, 32, 0.125);
     backdrop-filter: blur(16px);
+    background-color: rgba(32, 32, 32, 0.125);
 
     position: sticky;
     place-items: center;
@@ -78,8 +77,8 @@ header {
         display: contents;
 
         li {
-            @include common.boxBorder(common.$paddingSmall);
             @include common.buttonStyle();
+            @include common.boxBorder(common.$paddingSmall);
 
             list-style: none;
         }
@@ -93,11 +92,11 @@ header {
         nav {
             @include common.boxBorder(common.$paddingMedium);
 
-            box-shadow: common.bevelOut(), 0 0 4px black;
             border-radius: 8px;
+            box-shadow: common.bevelOut(), 0 0 4px black;
 
-            background-color: rgba(32, 32, 32, 0.125);
             backdrop-filter: blur(16px);
+            background-color: rgba(32, 32, 32, 0.125);
         }
     }
 }
@@ -124,12 +123,12 @@ main {
 
         box-shadow: common.bevelOutTB(), 0 0 4px black;
 
-        background-color: rgba(32, 32, 32, 0.125);
         backdrop-filter: blur(16px);
+        background-color: rgba(32, 32, 32, 0.125);
 
         @media (min-width: common.$breakpointDesktop) {
-            box-shadow: common.bevelOut(), 0 0 4px black;
             border-radius: 8px;
+            box-shadow: common.bevelOut(), 0 0 4px black;
         }
     }
 
@@ -137,9 +136,9 @@ main {
         .consoleWindow {
             @include common.boxBorder(common.$paddingMedium, 0);
 
-            box-shadow: bevelIn(), 0 0 4px black inset;
-            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: bevelIn(), 0 0 4px black inset;
 
             .flexRowWrap {
                 @include common.flexRowWrap();
@@ -190,8 +189,8 @@ footer {
 
     box-shadow: common.bevelOutTB(), 0 0 4px black;
 
-    background-color: rgba(32, 32, 32, 0.125);
     backdrop-filter: blur(16px);
+    background-color: rgba(32, 32, 32, 0.125);
 
     section {
         @include common.flexRowWrap(common.$paddingSmall);
@@ -200,8 +199,8 @@ footer {
     }
 
     @media (min-width: common.$breakpointDesktop) {
-        box-shadow: common.bevelOut(), 0 0 4px black;
         border-radius: 8px;
+        box-shadow: common.bevelOut(), 0 0 4px black;
     }
 }
 
