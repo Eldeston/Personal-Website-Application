@@ -267,7 +267,7 @@ footer section {
 }
 
 #fps {
-  color: color 0.25s ease-in-out;
+  transition: color 0.25s ease-in-out;
 }
 
 #githubPfp {
