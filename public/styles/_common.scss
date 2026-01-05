@@ -1,6 +1,6 @@
 /* ---------------- VARIABLES GOES HERE ---------------- */
 
-$debugMode: "false";
+$debugMode: 'false';
 
 $breakpointMobile: 540px;
 $breakpointTablet: 720px;
@@ -65,7 +65,7 @@ $paddingSmall: 0.5rem;
 
 // Public mixin: checks $debugMode inside and accepts adjustable steps
 @mixin debugStyle($levels: 5, $hueStart: 0, $hueStep: 72, $width: 2px) {
-    @if $debugMode == "true" {
+    @if $debugMode == 'true' {
         @include _debugLevel(1, $levels, $hueStart, $hueStep, $width);
     }
 }
@@ -80,4 +80,7 @@ $paddingSmall: 0.5rem;
 
 /* ---------------- IMPORTS GOES HERE ---------------- */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url(assets/JetBrainsMonoRegular.ttf);
+}
