@@ -245,7 +245,7 @@ footer {
 
 #fps {
     // Smooths FPS updates
-    transition: color 0.25s ease-in-out;
+    transition: color 0.5s ease-in-out;
 }
 
 #githubPfp {
@@ -253,19 +253,6 @@ footer {
 }
 
 #mainCanvas {
-    // For some reason, a lot of the elements have top set for them
-    top: 0;
-    // Ensures the full screen is utilized by p5.js
-    width: 100vw;
-    height: 100vh;
-    // Keep background sticky
-    // Keeps background behind all the elements since it's sticky
-    z-index: -1;
-    position: fixed;
-}
-
-// Unused
-#sketchP5 {
     // For some reason, a lot of the elements have top set for them
     top: 0;
     // Ensures the full screen is utilized by p5.js

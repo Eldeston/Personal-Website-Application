@@ -93,6 +93,12 @@ class MainCanvas {
 
         // Bind main loop to this class
         this.mainLoop = this.mainLoop.bind(this);
+        
+         // Get particles element
+        this.particlesElement = document.getElementById('particles');
+        // Set particles text
+        this.particlesElement.textContent = `${particles} particles`;
+
         // Get FPS element
         this.fpsElement = document.getElementById('fps');
 

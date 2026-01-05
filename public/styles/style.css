@@ -267,7 +267,7 @@ footer section {
 }
 
 #fps {
-  transition: color 0.25s ease-in-out;
+  transition: color 0.5s ease-in-out;
 }
 
 #githubPfp {
@@ -275,14 +275,6 @@ footer section {
 }
 
 #mainCanvas {
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  position: fixed;
-}
-
-#sketchP5 {
   top: 0;
   width: 100vw;
   height: 100vh;
