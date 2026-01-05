@@ -72,7 +72,7 @@ $paddingSmall: 0.5rem;
 
 /* ---------------- ANIMATION GOES HERE ---------------- */
 
-/* Smoothes the blinking cursor */
+// Smoothes the blinking cursor
 @keyframes alphaAnim {
     from { opacity: 0%; }
     to { opacity: 100%; }
@@ -80,6 +80,7 @@ $paddingSmall: 0.5rem;
 
 /* ---------------- IMPORTS GOES HERE ---------------- */
 
+// Localized font
 @font-face {
     font-family: 'JetBrains Mono';
     src: url(assets/JetBrainsMonoRegular.ttf);

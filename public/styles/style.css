@@ -11,7 +11,6 @@ Layout, styling, and responsive
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 /* ---------------- MIXINS GOES HERE ---------------- */
 /* ---------------- ANIMATION GOES HERE ---------------- */
-/* Smoothes the blinking cursor */
 @keyframes alphaAnim {
   from {
     opacity: 0%;
