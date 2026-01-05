@@ -1,3 +1,10 @@
+/*
+
+This script is converted from p5.js to take advantage of more performance optimizations
+and to have more control over the canvas rendering process.
+
+*/
+
 /* ---------------- CANVAS SETUP ---------------- */
 
 const canvas = document.getElementById("mainCanvas");
@@ -21,9 +28,13 @@ const maxWindowLength = Math.max(window.innerWidth, window.innerHeight);
 // Dark mode toggle
 const mode = true;
 
+// Contol FPS here
+const targetFPS = 1000;
+const targetFrameTime = 1000 / targetFPS;
+
 // Particle constants
 const particles = maxWindowLength * 2;
-const particleSpeed = 128.0;
+const particleSpeed = 2.0;
 const particleSize = 1;
 
 // Half size for drawing
@@ -53,13 +64,14 @@ class Particle {
         this.velocityY = velocityY;
     }
 
-    updateParticle(finalSpeed) {
+    updateParticle() {
         // Multiply velocity by particleSpeed and add to position to update and move the particle
-        this.positionX += this.velocityX * finalSpeed;
-        this.positionY += this.velocityY * finalSpeed;
+        this.positionX += this.velocityX * particleSpeed;
+        this.positionY += this.velocityY * particleSpeed;
 
         // Calculate new velocity vector based on perlin noise
-        const angle = perlin3DInstance.perlin3D(this.positionX * noiseScale, this.positionY * noiseScale, noiseTime) * noiseRotations;
+        const angle = value3DInstance.value3D(this.positionX * noiseScale, this.positionY * noiseScale, noiseTime) * noiseRotations;
+
         // Create a 2D vector and assign new velocity
         this.velocityX = Math.sin(angle);
         this.velocityY = Math.cos(angle);
@@ -102,32 +114,24 @@ class MainCanvas {
         // Get FPS element
         this.fpsElement = document.getElementById('fps');
 
-        // Update FPS display every second
+        // Update FPS display
         setInterval(() => {
             const fps = Math.round(1 / deltaTime);
             this.fpsElement.textContent = `${fps} FPS`;
 
-            if (fps >= 60)
-                // Good performance
-                this.fpsElement.style.color = "lime";
-            else if (fps >= 30)
-                // Acceptable
-                this.fpsElement.style.color = "gold";
-            else
-                // Poor performance
-                this.fpsElement.style.color = "red";
-        }, 1000);
+            // Good performance
+            if (fps >= 60) this.fpsElement.style.color = "lime";
+            // Acceptable
+            else if (fps >= 30) this.fpsElement.style.color = "gold";
+            // Poor performance
+            else this.fpsElement.style.color = "red";
+        }, 500);
 
         // Start the loop
         requestAnimationFrame(this.mainLoop);
     }
 
-    mainLoop(currTime){
-        // Delta time calculation
-        deltaTime = (currTime - lastTime) * 0.001;
-        // Updates current time
-        lastTime = currTime;
-
+    mainDraw() {
         // For changing blue value over time
         sineTime = Math.sin(noiseTime) * 128 + 128;
         // For changing noise over time
@@ -137,13 +141,25 @@ class MainCanvas {
         ctx.fillStyle = mode ? "rgba(0, 0, 0, 0.03125)" : "rgba(255, 255, 255, 0.03125)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Particle final speed calculation
-        const finalSpeed = particleSpeed * deltaTime;
-
         // Load, update, and display particles
         for (let particle of particleList) {
-            particle.updateParticle(finalSpeed);
+            particle.updateParticle();
             particle.drawParticle();
+        }
+    }
+
+    mainLoop(currTime){
+        // Calculate elapsed time
+        const elapsedTime = currTime - lastTime;
+
+        if (elapsedTime > targetFrameTime) {
+            // Delta time calculation
+            deltaTime = elapsedTime * 0.001;
+            // Updates current time
+            lastTime = currTime;
+            
+            // Main draw call
+            this.mainDraw();
         }
 
         // Request next frame

@@ -23,7 +23,7 @@ body {
     @include common.debugStyle();
 
     display: flex;
-    place-items: center;
+    align-items: center;
     flex-direction: column;
     
     color: white;
@@ -52,23 +52,32 @@ header, main, footer {
 }
 
 header {
-    @include common.glassMaterial();
     @include common.boxBorder(common.$paddingSmall);
-    @include common.flexRowWrap(common.$paddingSmall);
 
-    box-shadow: common.bevelOutTB(), 0 0 4px black;
+    display: flex;
+    flex-flow: row wrap;
 
-    position: sticky;
-    place-items: center;
-    place-content: space-between;
-
-    top: 0;
     z-index: 10;
+    display: flex;
+    position: sticky;
+    gap: common.$paddingMedium;
+
+    align-items: center;
+    justify-content: center;
+    
+    order: 99;
+    bottom: 0;
+    margin: common.$paddingBig 0 0 0;
 
     nav {
-        @include common.flexRowWrap(common.$paddingSmall);
+        @include common.glassMaterial();
+        @include common.boxBorder(common.$paddingMedium);
+        @include common.flexRowWrap(common.$paddingMedium);
 
-        gap: common.$paddingMedium;
+        justify-content: space-evenly;
+
+        border-radius: 8px;
+        box-shadow: common.bevelOut(), 0 0 4px black;
     }
 
     a, ul {
@@ -83,42 +92,35 @@ header {
 
             &:hover {
                 background-color: rgb(0, 110, 255, 1);
-                box-shadow: bevelOut(0.5, 0.5), 0 0 4px black;
+                box-shadow: common.bevelOut(0.5, 0.5), 0 0 4px black;
             }
 
             &:active {
                 background-color: rgb(0, 55, 128, 1);
-                box-shadow: bevelIn(0.25, 0.5), 0 0 4px black inset;
+                box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px black inset;
             }
         }
     }
 
     @media (min-width: common.$breakpointTablet) {
-        box-shadow: none;
-        backdrop-filter: none;
-        background-color: transparent;
-
-        nav {
-            @include common.glassMaterial();
-            @include common.boxBorder(common.$paddingMedium);
-
-            border-radius: 8px;
-            box-shadow: common.bevelOut(), 0 0 4px black;
-        }
+        top: 0;
+        order: 0;
+        justify-content: space-between;
+        margin: 0 0 common.$paddingBig 0;
     }
 }
 
 main {
     display: flex;
-    flex-flow: column nowrap;
     gap: common.$paddingBig;
+    flex-flow: column nowrap;
 
     section {
         @include common.flexRowWrap(common.$paddingSmall);
 
-        padding: 128px 0;
-        place-items: center;
-        place-content: center;
+        padding: 12.5vh 0;
+        align-items: center;
+        justify-content: center;
 
         #heroHeader {
             text-align: center;
@@ -149,7 +151,7 @@ main {
                 @include common.flexRowWrap();
 
                 gap: common.$paddingSmall;
-                place-content: space-between;
+                justify-content: space-between;
 
                 p {
                     transition: padding 1s ease-in-out, border-width 1s ease-in-out;
@@ -179,7 +181,7 @@ main {
         #iFrameContainer {
             @include common.flexRowWrap();
 
-            place-content: center;
+            justify-content: center;
 
             iframe {
                 width: 480px;
@@ -198,7 +200,7 @@ footer {
     section {
         @include common.flexRowWrap(common.$paddingSmall);
 
-        place-content: space-between;
+        justify-content: space-between;
     }
 
     @media (min-width: common.$breakpointDesktop) {
@@ -218,16 +220,16 @@ footer {
 .griddy {
     @include common.flexRowWrap(common.$paddingSmall);
 
-    place-content: space-evenly;
+    justify-content: space-evenly;
 }
 
 .iconDisplay {
     @include common.flexRowWrap(common.$paddingBig);
 
-    place-content: center;
+    justify-content: center;
 
     .iconDisplayHeader {
-        place-content: center;
+        justify-content: center;
     }
 }
 
