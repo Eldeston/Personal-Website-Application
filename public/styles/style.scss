@@ -76,7 +76,7 @@ header {
 
         justify-content: space-evenly;
 
-        border-radius: 8px;
+        border-radius: common.$paddingMedium;
         box-shadow: common.bevelOut(), 0 0 4px black;
     }
 
@@ -88,7 +88,7 @@ header {
 
             transition: 0.5s;
             list-style: none;
-            border-radius: 8px;
+            border-radius: common.$paddingMedium;
 
             &:hover {
                 background-color: rgb(0, 110, 255, 1);
@@ -134,7 +134,7 @@ main {
         box-shadow: common.bevelOutTB(), 0 0 4px black;
 
         @media (min-width: common.$breakpointDesktop) {
-            border-radius: 8px;
+            border-radius: common.$paddingMedium;
             box-shadow: common.bevelOut(), 0 0 4px black;
         }
     }
@@ -143,7 +143,7 @@ main {
         .consoleWindow {
             @include common.boxBorder(common.$paddingMedium, 0);
 
-            border-radius: 8px;
+            border-radius: common.$paddingMedium;
             background-color: rgba(0, 0, 0, 0.5);
             box-shadow: bevelIn(), 0 0 4px black inset;
 
@@ -204,7 +204,7 @@ footer {
     }
 
     @media (min-width: common.$breakpointDesktop) {
-        border-radius: 8px;
+        border-radius: common.$paddingMedium;
         box-shadow: common.bevelOut(), 0 0 4px black;
     }
 }

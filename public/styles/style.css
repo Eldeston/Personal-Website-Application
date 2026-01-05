@@ -95,7 +95,7 @@ header nav {
   flex-flow: row wrap;
   gap: 1rem;
   justify-content: space-evenly;
-  border-radius: 8px;
+  border-radius: 1rem;
   box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
 }
 header a, header ul {
@@ -107,7 +107,7 @@ header a li, header ul li {
   border: none;
   transition: 0.5s;
   list-style: none;
-  border-radius: 8px;
+  border-radius: 1rem;
 }
 header a li:hover, header ul li:hover {
   background-color: rgb(0, 110, 255);
@@ -153,7 +153,7 @@ main article {
 }
 @media (min-width: 1024px) {
   main article {
-    border-radius: 8px;
+    border-radius: 1rem;
     box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
   }
 }
@@ -161,7 +161,7 @@ main #about .consoleWindow {
   padding: 1rem;
   margin: 0;
   border: none;
-  border-radius: 8px;
+  border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: bevelIn(), 0 0 4px black inset;
 }
@@ -217,7 +217,7 @@ footer section {
 }
 @media (min-width: 1024px) {
   footer {
-    border-radius: 8px;
+    border-radius: 1rem;
     box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
   }
 }
