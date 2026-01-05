@@ -52,31 +52,13 @@ header, main, footer {
     width: min(100%, common.$breakpointDesktop);
 }
 
-button {
-    @include common.boxBorder(common.$paddingSmall common.$paddingMedium, common.$paddingMedium 0 0 0);
-
-    font-size: 1rem;
-    list-style: none;
-    font-family: 'JetBrains Mono';
-
-    color: var(--colorForeground);
-    background-color: var(--colorHover);
-    border-radius: common.$paddingMedium;
-    box-shadow: common.bevelOut(0.5, 0.5), 0 0 4px rgb(0, 0, 0, 0.5);
-
-    &:active {
-        background-color: var(--colorActive);
-        box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px rgb(0, 0, 0, 0.5) inset;
-    }
-}
-
 header {
     @include common.boxBorder(common.$paddingSmall);
 
     display: flex;
     flex-flow: row wrap;
 
-    z-index: 10;
+    z-index: 9;
     display: flex;
     position: sticky;
     gap: common.$paddingMedium;
@@ -295,4 +277,30 @@ footer {
     transition: filter 0.5s ease-in-out;
     // Modern problems require modern solutions
     filter: var(--filterBackground);
+}
+
+#themeButton {
+    @include common.boxBorder(common.$paddingSmall common.$paddingMedium, common.$paddingBig);
+
+    right: 0;
+    z-index: 10;
+    position: fixed;
+
+    font-size: 1rem;
+    list-style: none;
+    font-family: 'JetBrains Mono';
+
+    color: var(--colorForeground);
+    background-color: var(--colorHover);
+    border-radius: common.$paddingMedium;
+    box-shadow: common.bevelOut(0.5, 0.5), 0 0 4px rgb(0, 0, 0, 0.5);
+
+    &:active {
+        background-color: var(--colorActive);
+        box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px rgb(0, 0, 0, 0.5) inset;
+    }
+
+    @media (min-width: common.$breakpointTablet) {
+        bottom: 0;
+    }
 }
