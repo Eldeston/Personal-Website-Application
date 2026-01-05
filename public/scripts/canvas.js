@@ -15,58 +15,70 @@ window.addEventListener("resize", resize);
 
 /* ---------------- MAIN CANVAS ---------------- */
 
-// Particle constants
+// Get max window dimension
+const maxWindowLength = Math.max(window.innerWidth, window.innerHeight);
+
+// Dark mode toggle
 const mode = true;
-const particles = 4096;
-const particleSize = 1;
+
+// Particle constants
+const particles = maxWindowLength * 2;
 const particleSpeed = 128.0;
+const particleSize = 1;
 
 // Half size for drawing
 const halfSize = particleSize * 0.5;
 
-const noiseScale = 1 / 512;
+// Noise constants
+const noiseScale = 4 / maxWindowLength;
 const noiseSpeed = 0.03125 * 0.001;
 const noiseRotations = 3 * Math.PI;
 
+// Particle list
 const particleList = [];
 
-let sineTime = 0;
 let noiseTime = 0;
+let sineTime = 0;
 
-let deltaTime = 0;
 let lastTime = performance.now();
+let deltaTime = 0;
 
 // Particle Class
 class Particle {
-    constructor(position, velocity) {
+    constructor(positionX, positionY, velocityX, velocityY) {
         // Upon construction of variable, store variables to this class
-        this.position = position;
-        this.velocity = velocity;
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
     }
 
     updateParticle(finalSpeed) {
         // Multiply velocity by particleSpeed and add to position to update and move the particle
-        this.position.add(this.velocity.x * finalSpeed, this.velocity.y * finalSpeed);
+        this.positionX += this.velocityX * finalSpeed;
+        this.positionY += this.velocityY * finalSpeed;
 
         // Calculate new velocity vector based on perlin noise
-        const angle = perlin3DInstance.perlin3D(this.position.x * noiseScale, this.position.y * noiseScale, noiseTime) * noiseRotations;
+        const angle = perlin3DInstance.perlin3D(this.positionX * noiseScale, this.positionY * noiseScale, noiseTime) * noiseRotations;
         // Create a 2D vector and assign new velocity
-        this.velocity.set(Math.sin(angle), Math.cos(angle));
+        this.velocityX = Math.sin(angle);
+        this.velocityY = Math.cos(angle);
 
         // Finally, color the particle according to current velocity and time
-        ctx.fillStyle = `rgb(${Math.abs(this.velocity.x) * 255}, ${Math.abs(this.velocity.y) * 255}, ${sineTime})`;
+        ctx.fillStyle = `rgb(${Math.abs(this.velocityX) * 255}, ${Math.abs(this.velocityY) * 255}, ${sineTime})`;
 
         // Check if particle goes outside the window borders and reset position
-        if (this.position.x < 0 || this.position.x > canvas.width || this.position.y < 0 || this.position.y > canvas.height) {
-            this.position.set(Math.random() * canvas.width, Math.random() * canvas.height);
+        if (this.positionX < 0 || this.positionX > canvas.width || this.positionY < 0 || this.positionY > canvas.height) {
+            this.positionX = Math.random() * canvas.width;
+            this.positionY = Math.random() * canvas.height;
         }
     }
 
     drawParticle() {
         // Centered rectangle draw
         ctx.fillRect(
-            this.position.x - halfSize,
-            this.position.y - halfSize,
+            this.positionX - halfSize,
+            this.positionY - halfSize,
             particleSize,
             particleSize
         );
@@ -77,7 +89,7 @@ class MainCanvas {
     constructor() {
         // Initialize particles
         for (let i = 0; i < particles; i++)
-            particleList.push(new Particle(new Vector2(0, 0), new Vector2(-1, 0)));
+            particleList.push(new Particle(0, 0, -1, 0));
 
         // Bind main loop to this class
         this.mainLoop = this.mainLoop.bind(this);
@@ -105,7 +117,7 @@ class MainCanvas {
         noiseTime = lastTime * noiseSpeed;
 
         // Transparent background fill
-        ctx.fillStyle = mode ? "rgba(0, 0, 0, 0.03)" : "rgba(255, 255, 255, 0.03)";
+        ctx.fillStyle = mode ? "rgba(0, 0, 0, 0.03125)" : "rgba(255, 255, 255, 0.03125)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // Particle final speed calculation

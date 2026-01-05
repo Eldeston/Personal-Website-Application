@@ -270,7 +270,7 @@ footer section {
   border-radius: 100%;
 }
 
-#sketchP5 {
+#mainCanvas {
   top: 0;
   width: 100vw;
   height: 100vh;
@@ -278,7 +278,7 @@ footer section {
   position: fixed;
 }
 
-#mainCanvas {
+#sketchP5 {
   top: 0;
   width: 100vw;
   height: 100vh;

@@ -247,7 +247,7 @@ footer {
     border-radius: 100%;
 }
 
-#sketchP5 {
+#mainCanvas {
     // For some reason, a lot of the elements have top set for them
     top: 0;
     // Ensures the full screen is utilized by p5.js
@@ -259,7 +259,8 @@ footer {
     position: fixed;
 }
 
-#mainCanvas {
+// Unused
+#sketchP5 {
     // For some reason, a lot of the elements have top set for them
     top: 0;
     // Ensures the full screen is utilized by p5.js
