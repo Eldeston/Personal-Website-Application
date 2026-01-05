@@ -8,10 +8,26 @@ Layout, styling, and responsive
 */
 /* ---------------- USE GOES HERE ---------------- */
 /* ---------------- VARIABLES GOES HERE ---------------- */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+:root {
+  --filterBackground: none;
+  --colorHover: rgb(0, 110, 255, 1);
+  --colorActive: rgb(0, 55, 128, 1);
+  --colorConsole: rgba(0, 0, 0, 0.5);
+  --colorForeground: rgba(255, 255, 255, 1);
+  --colorBackground: rgba(30, 30, 30, 0.125);
+}
+
+.themeToggle {
+  --filterBackground: invert(1);
+  --colorConsole: rgba(255, 255, 255, 0.5);
+  --colorForeground: rgba(0, 0, 0, 1);
+  --colorBackground: rgba(225, 225, 225, 0.125);
+}
+
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 /* ---------------- MIXINS GOES HERE ---------------- */
 /* ---------------- ANIMATION GOES HERE ---------------- */
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @keyframes alphaAnim {
   from {
     opacity: 0%;
@@ -32,9 +48,10 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  color: white;
   background-color: black;
   font-family: "JetBrains Mono";
+  color: var(--colorForeground);
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 h1 {
@@ -54,7 +71,7 @@ h1, h2, h3 {
 }
 
 a {
-  color: white;
+  color: var(--colorForeground);
   text-decoration: none;
 }
 
@@ -65,6 +82,23 @@ iframe {
 header, main, footer {
   box-sizing: border-box;
   width: min(100%, 1024px);
+}
+
+button {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0 0 0;
+  border: none;
+  font-size: 1rem;
+  list-style: none;
+  font-family: "JetBrains Mono";
+  color: var(--colorForeground);
+  background-color: var(--colorHover);
+  border-radius: 1rem;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) inset, -1px 0 0 rgba(0, 0, 0, 0.5) inset, 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px rgba(0, 0, 0, 0.5);
+}
+button:active {
+  background-color: var(--colorActive);
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.25) inset, 1px 0 0 rgba(0, 0, 0, 0.25) inset, 0 -1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px rgba(0, 0, 0, 0.5) inset;
 }
 
 header {
@@ -81,12 +115,13 @@ header {
   justify-content: center;
   order: 99;
   bottom: 0;
-  margin: 2rem 0 0 0;
+  margin: 0;
 }
 header nav {
+  transition: background-color 0.5s ease-in-out;
+  background-color: var(--colorBackground);
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
-  background-color: rgba(32, 32, 32, 0.125);
   padding: 1rem;
   margin: 0;
   border: none;
@@ -95,13 +130,13 @@ header nav {
   gap: 1rem;
   justify-content: space-evenly;
   border-radius: 1rem;
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5);
 }
 header a, header ul {
   display: contents;
 }
 header a li, header ul li {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   margin: 0;
   border: none;
   transition: 0.5s;
@@ -109,12 +144,12 @@ header a li, header ul li {
   border-radius: 1rem;
 }
 header a li:hover, header ul li:hover {
-  background-color: rgb(0, 110, 255);
-  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) inset, -1px 0 0 rgba(0, 0, 0, 0.5) inset, 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px black;
+  background-color: var(--colorHover);
+  box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) inset, -1px 0 0 rgba(0, 0, 0, 0.5) inset, 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px rgba(0, 0, 0, 0.5);
 }
 header a li:active, header ul li:active {
-  background-color: rgb(0, 55, 128);
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.25) inset, 1px 0 0 rgba(0, 0, 0, 0.25) inset, 0 -1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px black inset;
+  background-color: var(--colorActive);
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.25) inset, 1px 0 0 rgba(0, 0, 0, 0.25) inset, 0 -1px 0 rgba(255, 255, 255, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.5) inset, 0 0 4px rgba(0, 0, 0, 0.5) inset;
 }
 @media (min-width: 720px) {
   header {
@@ -142,18 +177,19 @@ main section #heroHeader {
   text-align: center;
 }
 main article {
+  transition: background-color 0.5s ease-in-out;
+  background-color: var(--colorBackground);
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
-  background-color: rgba(32, 32, 32, 0.125);
   padding: 1rem;
   margin: 0;
   border: none;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5);
 }
 @media (min-width: 1024px) {
   main article {
     border-radius: 1rem;
-    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5);
   }
 }
 main #about .consoleWindow {
@@ -161,8 +197,8 @@ main #about .consoleWindow {
   margin: 0;
   border: none;
   border-radius: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.125) inset, 1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black inset;
+  background-color: var(--colorConsole);
+  box-shadow: -1px 0 0 rgba(255, 255, 255, 0.125) inset, 1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 -1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5) inset;
 }
 main #about .consoleWindow .flexRowWrap {
   display: flex;
@@ -200,13 +236,14 @@ main #projects #iFrameContainer iframe {
 }
 
 footer {
+  transition: background-color 0.5s ease-in-out;
+  background-color: var(--colorBackground);
   -webkit-backdrop-filter: blur(16px);
           backdrop-filter: blur(16px);
-  background-color: rgba(32, 32, 32, 0.125);
   padding: 1rem;
   margin: 2rem 0 0 0;
   border: none;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5);
 }
 footer section {
   display: flex;
@@ -217,7 +254,7 @@ footer section {
 @media (min-width: 1024px) {
   footer {
     border-radius: 1rem;
-    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px black;
+    box-shadow: 1px 0 0 rgba(255, 255, 255, 0.125) inset, -1px 0 0 rgba(0, 0, 0, 0.125) inset, 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 -1px 0 rgba(0, 0, 0, 0.25) inset, 0 0 4px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -227,6 +264,11 @@ footer section {
 
 .cursorBlink {
   animation: alphaAnim 1s infinite;
+}
+
+.themedLogos {
+  transition: 0.5s ease-in-out;
+  filter: var(--filterBackground);
 }
 
 .griddy {
@@ -276,4 +318,6 @@ footer section {
   height: 100vh;
   z-index: -1;
   position: fixed;
+  transition: filter 0.5s ease-in-out;
+  filter: var(--filterBackground);
 }/*# sourceMappingURL=style.css.map */

@@ -10,6 +10,22 @@ $paddingBig: 2rem;
 $paddingMedium: 1rem;
 $paddingSmall: 0.5rem;
 
+:root {
+    --filterBackground: none;
+    --colorHover: rgb(0, 110, 255, 1);
+    --colorActive: rgb(0, 55, 128, 1);
+    --colorConsole: rgba(0, 0, 0, 0.5);
+    --colorForeground: rgba(255, 255, 255, 1);
+    --colorBackground: rgba(30, 30, 30, 0.125);
+}
+
+.themeToggle {
+    --filterBackground: invert(1);
+    --colorConsole: rgba(255, 255, 255, 0.5);
+    --colorForeground: rgba(0, 0, 0, 1);
+    --colorBackground: rgba(225, 225, 225, 0.125);
+}
+
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 
 @function bevelIn($minOpacity: 0.125, $maxOpacity: 0.25, $width: 1px) {
@@ -48,9 +64,11 @@ $paddingSmall: 0.5rem;
     gap: $gap;
 }
 
-@mixin glassMaterial($blurAmount: 16px, $bgColor: rgba(32, 32, 32, 0.125)) {
-    backdrop-filter: blur($blurAmount);
+@mixin glassMaterial($blurAmount: 16px, $bgColor: var(--colorBackground)) {
+    transition: background-color 0.5s ease-in-out;
+
     background-color: $bgColor;
+    backdrop-filter: blur($blurAmount);
 }
 
 // Recusive helper: produce N nested levels

@@ -44,3 +44,10 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.typing').forEach(element => {
     observer.observe(element);
 });
+
+const themeButton = document.getElementById("themeButton")
+
+themeButton.addEventListener("click", () => {
+    document.documentElement.classList.toggle("themeToggle");
+    themeButton.textContent = document.documentElement.classList.contains("themeToggle") ? "☀️ Light" : "🌙 Dark";
+});
