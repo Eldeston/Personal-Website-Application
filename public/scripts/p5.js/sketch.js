@@ -1,14 +1,15 @@
 // Disables friendly error to increase performance
 p5.disableFriendlyErrors = true;
 
-const particles = 4096;
-const particleSize = 1;
+const particles = 2048;
+const particleSize = 2;
 const particleSpeed = 2.0;
 
 const noiseSpeed = 0.03125;
 const noiseScale = 1 / 512;
 const noiseRotations = 3 * Math.PI;
 
+let mode = true;
 let currTime = 0;
 let timeSine = 0;
 let particleList = [];
@@ -68,7 +69,8 @@ function draw(){
     timeSine = Math.sin(currTime) * 128 + 128;
 
     // Set alpha to 8 to create trails
-    background(0, 0, 0, 8);
+    if(mode) background(0, 0, 0, 8);
+    else background(255, 255, 255, 8);
 
     // Load, update, and display particles
     for(let i = 0; i < particleList.length; i++){

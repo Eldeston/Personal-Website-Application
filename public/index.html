@@ -8,14 +8,17 @@
         <title>Eldeston's Portal</title>
 
         <!-- Styles -->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styles/style.css">
         <!-- Website tab icon -->
         <link rel="shortcut icon" href="assets/logo.svg" type="image/x-icon">
     </head>
 
     <body>
         <!-- Display iframe as background -->
-        <iframe id="sketchP5" src="assets/javaScript/p5.js/sketch.html"></iframe>
+        <!-- <iframe id="sketchP5" src="scripts/p5.js/sketch.html"></iframe> -->
+
+        <!-- Display canvas as background -->
+        <canvas id="mainCanvas"></canvas>
 
         <!-- Header -->
         <header>
@@ -51,7 +54,7 @@
             <article id="about">
                 <h2><span class="typing">📗 About Me</span><span class="cursorBlink">_</span></h2>
                 <p>I'm a self-taught developer and founder of FlameRender© Studios, creating optimized and well‑documented software.</p>
-                <p>I mainly work on Minecraft‑related projects and software development, and I'm expanding into graphics programming. The background is a p5.js flow field with 4000+ particles.</p>
+                <p>I mainly work on Minecraft‑related projects and software development, and I'm expanding into graphics programming. The background is a canvas flow field with 4000+ particles running at <span id="fps">/ FPS~</span>.</p>
 
                 <h2><span class="typing">🖥️ Github Stats</span><span class="cursorBlink">_</span></h2>
                 <div class="consoleWindow">
@@ -243,13 +246,16 @@
             <hr>
 
             <section>
-                <p>2025 FlameRender© Studios, All Rights Reserved</p>
-                <p>Graphics powered by p5.js</p>
+                <p>2025 FlameRender© Studios</p>
+                <p>All Rights Reserved</p>
             </section>
         </footer>
 
-        <script src="assets/javaScript/stats.js"></script>
-        <script src="assets/javaScript/typing.js"></script>
+        <!-- Scripts -->
+        <script src="scripts/util.js"></script>
+        <script src="scripts/canvas.js"></script>
+        <script src="scripts/stats.js"></script>
+        <script src="scripts/typing.js"></script>
 
         <!-- Vercel Speed Insights -->
         <script>

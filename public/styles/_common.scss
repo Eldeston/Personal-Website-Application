@@ -48,19 +48,9 @@ $paddingSmall: 0.5rem;
     gap: $gap;
 }
 
-@mixin buttonStyle() {
-    border-radius: 8px;
-    transition: 0.5s;
-
-    &:hover {
-        box-shadow: bevelOut(0.5, 0.5), 0 0 4px black;
-        background-color: rgb(0, 110, 255, 1);
-    }
-
-    &:active {
-        box-shadow: bevelIn(0.25, 0.5), 0 0 4px black inset;
-        background-color: rgb(0, 55, 128, 1);
-    }
+@mixin glassMaterial($blurAmount: 16px, $bgColor: rgba(32, 32, 32, 0.125)) {
+    backdrop-filter: blur($blurAmount);
+    background-color: $bgColor;
 }
 
 // Recusive helper: produce N nested levels

@@ -23,12 +23,12 @@ body {
     @include common.debugStyle();
 
     display: flex;
-    flex-direction: column;
     place-items: center;
-
-    font-family: 'JetBrains Mono';
+    flex-direction: column;
+    
     color: white;
     background-color: black;
+    font-family: 'JetBrains Mono';
 }
 
 h1 { font-size: clamp(1.5rem, 6vw, 3rem); }
@@ -40,8 +40,8 @@ h1, h2, h3 {
 }
 
 a {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
 }
 
 iframe { border: none; }
@@ -52,13 +52,11 @@ header, main, footer {
 }
 
 header {
-    @include common.flexRowWrap(common.$paddingSmall);
+    @include common.glassMaterial();
     @include common.boxBorder(common.$paddingSmall);
+    @include common.flexRowWrap(common.$paddingSmall);
 
     box-shadow: common.bevelOutTB(), 0 0 4px black;
-
-    backdrop-filter: blur(16px);
-    background-color: rgba(32, 32, 32, 0.125);
 
     position: sticky;
     place-items: center;
@@ -77,10 +75,21 @@ header {
         display: contents;
 
         li {
-            @include common.buttonStyle();
             @include common.boxBorder(common.$paddingSmall);
 
+            transition: 0.5s;
             list-style: none;
+            border-radius: 8px;
+
+            &:hover {
+                background-color: rgb(0, 110, 255, 1);
+                box-shadow: bevelOut(0.5, 0.5), 0 0 4px black;
+            }
+
+            &:active {
+                background-color: rgb(0, 55, 128, 1);
+                box-shadow: bevelIn(0.25, 0.5), 0 0 4px black inset;
+            }
         }
     }
 
@@ -90,13 +99,11 @@ header {
         background-color: transparent;
 
         nav {
+            @include common.glassMaterial();
             @include common.boxBorder(common.$paddingMedium);
 
             border-radius: 8px;
             box-shadow: common.bevelOut(), 0 0 4px black;
-
-            backdrop-filter: blur(16px);
-            background-color: rgba(32, 32, 32, 0.125);
         }
     }
 }
@@ -119,12 +126,10 @@ main {
     }
 
     article {
+        @include common.glassMaterial();
         @include common.boxBorder(common.$paddingMedium);
 
         box-shadow: common.bevelOutTB(), 0 0 4px black;
-
-        backdrop-filter: blur(16px);
-        background-color: rgba(32, 32, 32, 0.125);
 
         @media (min-width: common.$breakpointDesktop) {
             border-radius: 8px;
@@ -185,12 +190,10 @@ main {
 }
 
 footer {
+    @include common.glassMaterial();
     @include common.boxBorder(common.$paddingMedium, common.$paddingBig 0 0 0);
 
     box-shadow: common.bevelOutTB(), 0 0 4px black;
-
-    backdrop-filter: blur(16px);
-    background-color: rgba(32, 32, 32, 0.125);
 
     section {
         @include common.flexRowWrap(common.$paddingSmall);
@@ -250,8 +253,20 @@ footer {
     // Ensures the full screen is utilized by p5.js
     width: 100vw;
     height: 100vh;
+    // Keep background sticky
     // Keeps background behind all the elements since it's sticky
     z-index: -1;
+    position: fixed;
+}
+
+#mainCanvas {
+    // For some reason, a lot of the elements have top set for them
+    top: 0;
+    // Ensures the full screen is utilized by p5.js
+    width: 100vw;
+    height: 100vh;
     // Keep background sticky
+    // Keeps background behind all the elements since it's sticky
+    z-index: -1;
     position: fixed;
 }
