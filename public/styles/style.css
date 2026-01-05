@@ -11,6 +11,7 @@ Layout, styling, and responsive
 /* ---------------- FUNCTIONS GOES HERE ---------------- */
 /* ---------------- MIXINS GOES HERE ---------------- */
 /* ---------------- ANIMATION GOES HERE ---------------- */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 @keyframes alphaAnim {
   from {
     opacity: 0%;
@@ -20,10 +21,6 @@ Layout, styling, and responsive
   }
 }
 /* ---------------- IMPORTS GOES HERE ---------------- */
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url(assets/JetBrainsMonoRegular.ttf);
-}
 /* ---------------- LAYOUT GOES HERE ---------------- */
 html, body {
   margin: 0;
