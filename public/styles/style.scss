@@ -41,8 +41,7 @@ h1, h2, h3 {
 }
 
 a {
-    color: var(--colorForeground);
-    text-decoration: none;
+    color: var(--colorHover)
 }
 
 iframe { border: none; }
@@ -99,6 +98,10 @@ header {
             &:active {
                 background-color: var(--colorActive);
                 box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px rgb(0, 0, 0, 0.5) inset;
+            }
+
+            a {
+                color: inherit;
             }
         }
     }
