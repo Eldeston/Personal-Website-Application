@@ -280,7 +280,7 @@ footer {
 }
 
 #themeButton {
-    @include common.boxBorder(common.$paddingSmall common.$paddingMedium, common.$paddingBig);
+    @include common.boxBorder(common.$paddingSmall common.$paddingMedium, common.$paddingSmall);
 
     right: 0;
     z-index: 10;
