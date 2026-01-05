@@ -145,7 +145,7 @@ main {
 
             border-radius: common.$paddingMedium;
             background-color: rgba(0, 0, 0, 0.5);
-            box-shadow: bevelIn(), 0 0 4px black inset;
+            box-shadow: common.bevelIn(), 0 0 4px black inset;
 
             .flexRowWrap {
                 @include common.flexRowWrap();
