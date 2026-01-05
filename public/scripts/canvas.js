@@ -98,7 +98,18 @@ class MainCanvas {
 
         // Update FPS display every second
         setInterval(() => {
-            this.fpsElement.textContent = `${Math.round(1 / deltaTime)} FPS`;
+            const fps = Math.round(1 / deltaTime);
+            this.fpsElement.textContent = `${fps} FPS`;
+
+            if (fps >= 60)
+                // Good performance
+                this.fpsElement.style.color = "lime";
+            else if (fps >= 30)
+                // Acceptable
+                this.fpsElement.style.color = "gold";
+            else
+                // Poor performance
+                this.fpsElement.style.color = "red";
         }, 1000);
 
         // Start the loop

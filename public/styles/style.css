@@ -266,6 +266,10 @@ footer section {
   width: 60px;
 }
 
+#fps {
+  color: color 0.25s ease-in-out;
+}
+
 #githubPfp {
   border-radius: 100%;
 }

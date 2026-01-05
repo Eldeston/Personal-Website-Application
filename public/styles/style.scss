@@ -243,6 +243,11 @@ footer {
     }
 }
 
+#fps {
+    // Smooths FPS updates
+    color: color 0.25s ease-in-out;
+}
+
 #githubPfp {
     border-radius: 100%;
 }
