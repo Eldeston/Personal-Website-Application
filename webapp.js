@@ -23,30 +23,37 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* ---------------- GITHUB API ---------------- */
 
 // Login through provided tokens
+// Otherwise, unauthenticated requests have a very low rate limit
 const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN || undefined });
 
-async function getTopLanguages(username, limit = 5) {
-    // Fetch repositories and aggregate language bytes
-    const repositoryData = await octokit.paginate(octokit.repos.listForUser, { username, per_page: 100 });
-
+async function getTopLanguages(repositoryData, limit = 5) {
+    // Fetch languages for all repositories when promise is settled
     const languageResponses = await Promise.allSettled(
-        repositoryData.map(r => octokit.repos.listLanguages({ owner: username, repo: r.name }))
+        repositoryData.map(r => octokit.repos.listLanguages({ owner: r.owner.login, repo: r.name }))
     );
 
+    // Create object to total up language bytes
     const languageTotals = {};
+    // Loops through all responses
     for (const res of languageResponses) {
+        // Only process fulfilled promises with data
         if (res.status === 'fulfilled' && res.value && res.value.data) {
+            // Loops through each language in the response
             for (const [lang, bytes] of Object.entries(res.value.data)) {
                 languageTotals[lang] = (languageTotals[lang] || 0) + bytes;
             }
         }
     }
 
+    // Finds total bytes
     const totalBytes = Object.values(languageTotals).reduce((s, v) => s + v, 0);
+    // Convert to array and sort by bytes
+    // Javascript can't sort objects directly
     const languagesArray = Object.entries(languageTotals)
         .map(([name, bytes]) => ({ name, bytes }))
         .sort((a, b) => b.bytes - a.bytes);
 
+    // Return top languages with percentage
     return languagesArray.slice(0, limit).map(({ name, bytes }) => ({
         name,
         bytes,
@@ -55,28 +62,30 @@ async function getTopLanguages(username, limit = 5) {
 }
 
 app.get("/github", async (request, result) => {
+    // Announce connection
     console.log('Connected to "/github"');
 
+    // Get username from query params
     const username = request.query.username;
 
+    // Validate username
     if (!username) return result.status(400).json({ error: "username query param required" });
 
     try {
+        // Fetch user data from GitHub API
         const userData = await octokit.users.getByUsername({ username });
         const repositoryData = await octokit.paginate(octokit.repos.listForUser, { username, per_page: 100 });
 
-        const totalStars = repositoryData.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+        // Calculate total stars and forks
         const totalForks = repositoryData.reduce((sum, r) => sum + (r.forks_count || 0), 0);
+        const totalStars = repositoryData.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
 
-        const topLanguages = await getTopLanguages(username, 5);
+        // Get top languages
+        const topLanguages = await getTopLanguages(repositoryData, 5);
 
         result.json({
-            login: userData.data.login,
-            name: userData.data.name,
             avatar_url: userData.data.avatar_url,
-            // html_url: userData.data.html_url,
             followers: userData.data.followers,
-            // following: userData.data.following,
             public_repos: userData.data.public_repos,
             public_gists: userData.data.public_gists,
             created_at: userData.data.created_at,
@@ -110,8 +119,10 @@ if (process.env.DISCORD_TOKEN) {
 }
 
 app.get("/discord", async (request, result) => {
+    // Announce connection
     console.log('Connected to "/discord"');
 
+    // Check if client is ready
     if (!discordClient.isReady()) return result.status(503).json({ error: "Discord client not ready" });
 
     try {
@@ -145,7 +156,8 @@ app.get("/discord", async (request, result) => {
 
 /* ---------------- START SERVER ---------------- */
 
-// Listen on specified port
+// Listen on specified port and announce url
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 
+// Needed for Vercel to work (this is insanity)
 export default app;
