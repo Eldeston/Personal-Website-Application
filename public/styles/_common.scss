@@ -10,6 +10,7 @@ $paddingBig: 2rem;
 $paddingMedium: 1rem;
 $paddingSmall: 0.5rem;
 
+// Dark theme defaults
 :root {
     --filterBackground: none;
     --colorHover: rgb(0, 110, 255, 1);
@@ -19,6 +20,7 @@ $paddingSmall: 0.5rem;
     --colorBackground: rgba(30, 30, 30, 0.125);
 }
 
+// Light theme overrides
 .themeToggle {
     --filterBackground: invert(1);
     --colorConsole: rgba(255, 255, 255, 0.5);

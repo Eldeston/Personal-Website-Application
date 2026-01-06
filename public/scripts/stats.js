@@ -17,11 +17,6 @@ function initializeSpeedInsights() {
     }
 }
 
-// Call on page load
-window.addEventListener('load', () => {
-    initializeSpeedInsights();
-});
-
 /* ---------------- GITHUB API ---------------- */
 
 function displayGithubStats(data) {
@@ -186,11 +181,3 @@ async function fetchDiscordStats(guildId) {
         console.error('Error fetching Discord stats:', error);
     }
 }
-
-// Call on page load
-document.addEventListener('DOMContentLoaded', () => {
-    // Replace with dynamic username if needed
-    fetchGithubStats('eldeston');
-    // Replace with dynamic guild id if needed
-    fetchDiscordStats('604061216779796492');
-});
