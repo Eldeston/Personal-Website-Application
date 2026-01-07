@@ -1,15 +1,3 @@
-// Nothing yet RAAAAAHHH
-
-/*
-
-TODO:
-
-- Impement security for the routes
-- Forum posts
-- Forum panel
-
-*/
-
 // GET highlighted posts
 async function fetchHighlightedPosts() {
     try {
@@ -65,9 +53,8 @@ async function renderHighlightedPosts() {
 
     container.innerHTML = posts.map(post => `
         <div class="consoleWindow">
-            <h3>${post.name}</h3>
             <p>${post.message}</p>
-            <p>${new Date(post.date).toLocaleString()}</p>
+            <h3>- ${post.name}, ${new Date(post.date).toLocaleString()}</h3>
         </div>
     `).join('<br>');
 }

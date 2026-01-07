@@ -149,7 +149,7 @@ app.get('/discord', async (request, result) => {
             memberCount: guild.memberCount,
             onlineCount
         });
-    } catch(error) {
+    } catch (error) {
         console.error('Discord bot-stats error:', error);
         result.status(500).json({ error: error.message });
     }
@@ -222,7 +222,7 @@ app.post('/forum', async (request, result) => {
     try {
         const { name, email, message } = request.body;
 
-        if(!name || !message) return result.status(400).json({ error: 'Missing name or message.' });
+        if (!name || !message) return result.status(400).json({ error: 'Missing name or message.' });
 
         const newPost = {
             name,

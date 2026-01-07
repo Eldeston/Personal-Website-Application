@@ -12,7 +12,7 @@ function startTyping(element) {
     // Declare a recursive function
     function typing() {
         // If conditions are met, exit function
-        if(iterations >= currText.length) return;
+        if (iterations >= currText.length) return;
         // Add the next character
         element.textContent += currText[iterations];
         // Iterate for the next character
@@ -31,13 +31,13 @@ function startTyping(element) {
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         // Simply return when intersection has not been made
-        if(!entry.isIntersecting) return;
+        if (!entry.isIntersecting) return;
         // Call on function
         startTyping(entry.target);
         // Stop observing once started
         observer.unobserve(entry.target);
     });
-// This sets theshold to execute the function when 50% of the element is in view
+    // This sets theshold to execute the function when 50% of the element is in view
 }, { threshold: 0.5 });
 
 // Observe all elements with the 'typing' class

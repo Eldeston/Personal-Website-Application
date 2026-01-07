@@ -2,14 +2,14 @@
 
 // Initialize Vercel Speed Insights
 function initializeSpeedInsights() {
-    if(typeof window !== 'undefined' && window.fetch) {
+    if (typeof window !== 'undefined' && window.fetch) {
         const script = document.createElement('script');
         script.src = 'https://cdn.vercel-analytics.com/v1/script.js';
         script.async = true;
 
-        script.onload = function() {
-            if(typeof window.va !== 'undefined') {
-                window.va.track = window.va.track || function() {};
+        script.onload = function () {
+            if (typeof window.va !== 'undefined') {
+                window.va.track = window.va.track || function () { };
             }
         };
 
@@ -108,7 +108,7 @@ function displayTopLanguages(languages = []) {
             const barWidth = (lang.percentage === 0 && hasBytes) ? '1' : `${lang.percentage}`;
             const displayPct = barWidth === '1' ? '<1' : lang.percentage;
 
-            if (textLang){
+            if (textLang) {
                 textLang.textContent = `${lang.name} — ${displayPct}%`;
                 textLang.style.borderLeft = `10px solid ${colorMap[lang.name] || 'gray'}`;
                 textLang.style.paddingLeft = '20px';
@@ -133,7 +133,7 @@ async function fetchGithubStats(username) {
         console.log('Fetching GitHub stats for:', username);
         const response = await fetch(`/github?username=${username}`);
 
-        if(!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const data = await response.json();
         console.log('GitHub data:', data);
@@ -141,7 +141,7 @@ async function fetchGithubStats(username) {
         // Display the data (example)
         displayGithubStats(data);
         return data;
-    } catch(error) {
+    } catch (error) {
         console.error('Error fetching GitHub stats:', error);
         throw error;
     }
@@ -177,7 +177,7 @@ async function fetchDiscordStats(guildId) {
 
         // Display the data (example)
         displayDiscordStats(data);
-    } catch(error) {
+    } catch (error) {
         console.error('Error fetching Discord stats:', error);
     }
 }

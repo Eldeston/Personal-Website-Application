@@ -105,8 +105,8 @@ class MainCanvas {
 
         // Bind main loop to this class
         this.mainLoop = this.mainLoop.bind(this);
-        
-         // Get particles element
+
+        // Get particles element
         this.particlesElement = document.getElementById('particles');
         // Set particles text
         this.particlesElement.textContent = `${particles} particles`;
@@ -148,7 +148,7 @@ class MainCanvas {
         }
     }
 
-    mainLoop(currTime){
+    mainLoop(currTime) {
         // Calculate elapsed time
         const elapsedTime = currTime - lastTime;
 
@@ -157,7 +157,7 @@ class MainCanvas {
             deltaTime = elapsedTime * 0.001;
             // Updates current time
             lastTime = currTime;
-            
+
             // Main draw call
             this.mainDraw();
         }
