@@ -1,3 +1,5 @@
+// Main function
+
 const backgroundToggle = document.getElementById("mainCanvas");
 const themeButton = document.getElementById("themeButton")
 const header = document.querySelector("header");

@@ -1,23 +1,24 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-import express from "express";
-import { Octokit } from "@octokit/rest";
-import { Client, GatewayIntentBits } from "discord.js";
+import express from 'express';
+import { MongoClient } from 'mongodb';
+import { Octokit } from '@octokit/rest';
+import { Client, GatewayIntentBits } from 'discord.js';
 
 const port = 3000;
 const app = express();
 
-import path from "path";
-import { fileURLToPath } from "url";
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Recreate __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serves the files for frontend
-// Necessary for css and other media
+// Serves the files for frontend and enables json
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ---------------- GITHUB API ---------------- */
@@ -61,7 +62,7 @@ async function getTopLanguages(repositoryData, limit = 5) {
     }));
 }
 
-app.get("/github", async (request, result) => {
+app.get('/github', async (request, result) => {
     // Announce connection
     console.log('Connected to "/github"');
 
@@ -69,7 +70,7 @@ app.get("/github", async (request, result) => {
     const username = request.query.username;
 
     // Validate username
-    if (!username) return result.status(400).json({ error: "username query param required" });
+    if (!username) return result.status(400).json({ error: 'username query param required' });
 
     try {
         // Fetch user data from GitHub API
@@ -112,30 +113,30 @@ const discordClient = new Client({
 // Login with token
 if (process.env.DISCORD_TOKEN) {
     discordClient.login(process.env.DISCORD_TOKEN)
-        .then(() => console.log("Discord bot logged in"))
-        .catch(error => console.error("Discord login error:", error.message));
+        .then(() => console.log('Discord bot logged in'))
+        .catch(error => console.error('Discord login error:', error.message));
 } else {
-    console.warn("DISCORD_TOKEN not set — Discord endpoints will be unavailable");
+    console.warn('DISCORD_TOKEN not set — Discord endpoints will be unavailable');
 }
 
-app.get("/discord", async (request, result) => {
+app.get('/discord', async (request, result) => {
     // Announce connection
     console.log('Connected to "/discord"');
 
     // Check if client is ready
-    if (!discordClient.isReady()) return result.status(503).json({ error: "Discord client not ready" });
+    if (!discordClient.isReady()) return result.status(503).json({ error: 'Discord client not ready' });
 
     try {
         const botUser = discordClient.user;
         const guild = discordClient.guilds.cache.get(request.query.guildId);
-        if (!guild) return result.status(400).json({ error: "Invalid or missing guildId" });
+        if (!guild) return result.status(400).json({ error: 'Invalid or missing guildId' });
 
         // Make sure members are cached
         await guild.members.fetch();
 
         // Check for online members and find the size
         const onlineCount = guild.members.cache.filter(
-            member => member.presence && member.presence.status === "online"
+            member => member.presence && member.presence.status === 'online'
         ).size;
 
         result.json({
@@ -149,8 +150,75 @@ app.get("/discord", async (request, result) => {
             onlineCount
         });
     } catch(error) {
-        console.error("Discord bot-stats error:", error);
+        console.error('Discord bot-stats error:', error);
         result.status(500).json({ error: error.message });
+    }
+});
+
+/* ---------------- MONGO DB ---------------- */
+
+const client = new MongoClient(process.env.MONGO_URL);
+
+try {
+    // Check connection to Mongo
+    await client.connect();
+} catch(error) {
+    // Throw error when unavailable
+    console.error("Forum service unavailable: Error 503")
+}
+
+// Accesses the forum database
+const forumDataBase = client.db('forumDatabase');
+const forumPosts = forumDataBase.collection('forumPosts');
+
+app.get('/forum', async (request, result) => {
+    console.log('GET /forum');
+
+    try {
+        // Sends only highlighted posts
+        const posts = await forumPosts
+            .find({ isHighlighted: true }, {
+                // Send only this data
+                projection: {
+                    _id: 1,
+                    name: 1,
+                    message: 1,
+                    date: 1
+                }
+            })
+            .sort({ date: -1 })
+            .toArray();
+
+        // Send results
+        result.json(posts);
+    } catch (error) {
+        console.error(error);
+        result.status(503).json({ error: 'Forum service unavailable.' });
+    }
+});
+
+app.post('/forum', async (request, result) => {
+    console.log('POST /forum');
+
+    try {
+        const { name, email, message } = request.body;
+
+        if(!name || !message) return result.status(400).json({ error: 'Missing name or message.' });
+
+        const newPost = {
+            name,
+            email: email || null,
+            message,
+            date: new Date(),
+            isHighlighted: false // always false until YOU highlight it
+        };
+
+        const insertResult = await forumPosts.insertOne(newPost);
+
+        result.json({ insertedId: insertResult.insertedId });
+    } catch (error) {
+        console.error(error);
+        result.status(503).json({ error: 'Forum service unavailable.' });
     }
 });
 

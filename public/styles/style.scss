@@ -40,15 +40,42 @@ h1, h2, h3 {
     flex: 0 1 auto;
 }
 
-a {
-    color: var(--colorHover)
-}
+a { color: var(--colorHover) }
 
 iframe { border: none; }
 
 header, main, footer {
     box-sizing: border-box;
     width: min(100%, common.$breakpointDesktop);
+}
+
+textarea { resize: vertical; }
+
+input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    font-size: 1rem;
+    font-family: 'JetBrains Mono';
+    color: var(--colorForeground);
+}
+
+button {
+    @include common.boxBorder(common.$paddingSmall common.$paddingMedium);
+
+    font-size: 1rem;
+    list-style: none;
+    font-family: 'JetBrains Mono';
+
+    color: var(--colorForeground);
+    background-color: var(--colorHover);
+    border-radius: common.$paddingMedium;
+    box-shadow: common.bevelOut(0.5, 0.5), 0 0 4px rgb(0, 0, 0, 0.5);
+
+    &:active {
+        background-color: var(--colorActive);
+        box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px rgb(0, 0, 0, 0.5) inset;
+    }
 }
 
 header {
@@ -146,12 +173,6 @@ main {
 
     #about {
         .consoleWindow {
-            @include common.boxBorder(common.$paddingMedium, 0);
-
-            border-radius: common.$paddingMedium;
-            background-color: var(--colorConsole);
-            box-shadow: common.bevelIn(), 0 0 4px rgb(0, 0, 0, 0.5) inset;
-
             .flexRowWrap {
                 @include common.flexRowWrap();
 
@@ -213,6 +234,17 @@ footer {
         border-radius: common.$paddingMedium;
         box-shadow: common.bevelOut(), 0 0 4px rgb(0, 0, 0, 0.5);
     }
+}
+
+.consoleWindow {
+    @include common.boxBorder(common.$paddingMedium, 0);
+
+    display: flex;
+    flex-flow: column;
+    border-radius: common.$paddingMedium;
+    background-color: var(--colorConsole);
+    transition: background-color 0.5s ease-in-out;
+    box-shadow: common.bevelIn(), 0 0 4px rgb(0, 0, 0, 0.5) inset;
 }
 
 .imageFillWidth {
@@ -285,25 +317,11 @@ footer {
 }
 
 #themeButton {
-    @include common.boxBorder(common.$paddingSmall common.$paddingMedium, common.$paddingSmall);
-
     right: 0;
     z-index: 2;
     position: fixed;
 
-    font-size: 1rem;
-    list-style: none;
-    font-family: 'JetBrains Mono';
-
-    color: var(--colorForeground);
-    background-color: var(--colorHover);
-    border-radius: common.$paddingMedium;
-    box-shadow: common.bevelOut(0.5, 0.5), 0 0 4px rgb(0, 0, 0, 0.5);
-
-    &:active {
-        background-color: var(--colorActive);
-        box-shadow: common.bevelIn(0.25, 0.5), 0 0 4px rgb(0, 0, 0, 0.5) inset;
-    }
+    margin: common.$paddingSmall;
 
     @media (min-width: common.$breakpointTablet) {
         bottom: 0;
