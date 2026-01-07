@@ -157,7 +157,7 @@ app.get('/discord', async (request, result) => {
 
 /* ---------------- MONGO DB ---------------- */
 
-// Connect to MongoDB
+// Connect to MongoDB (for some reason this is crashing Vercel)
 const client = new MongoClient(process.env.MONGODB_URI, {
     serverApi: {
         version: ServerApiVersion.v1,
