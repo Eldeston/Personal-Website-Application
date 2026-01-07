@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import { MongoClient } from 'mongodb';
+import { MongoClient, ServerApiVersion } from 'mongodb';
 import { Octokit } from '@octokit/rest';
 import { Client, GatewayIntentBits } from 'discord.js';
 
@@ -157,20 +157,38 @@ app.get('/discord', async (request, result) => {
 
 /* ---------------- MONGO DB ---------------- */
 
-const client = new MongoClient(process.env.MONGO_URL);
+// Connect to MongoDB
+const client = new MongoClient(process.env.MONGODB_URI, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
 
-try {
-    // Check connection to Mongo
-    await client.connect();
-} catch(error) {
-    // Throw error when unavailable
-    console.error("Forum service unavailable: Error 503")
+async function initMongo() {
+    try {
+        // Connect to MongoDB
+        console.log("Connecting to MongoDB...");
+        await client.connect();
+
+        // Find/create database
+        const db = client.db('forumDatabase');
+        console.log("MongoDB connected successfully");
+
+        // Return database
+        return db.collection('forumPosts');
+    } catch (error) {
+        // Null means MongoDB is unavailable
+        console.warn("MongoDB unavailable — running without database");
+        return null;
+    }
 }
 
-// Accesses the forum database
-const forumDataBase = client.db('forumDatabase');
-const forumPosts = forumDataBase.collection('forumPosts');
+// Initialize MongoDB
+const forumPosts = await initMongo();
 
+// Sends higlighted forum posts
 app.get('/forum', async (request, result) => {
     console.log('GET /forum');
 
@@ -197,6 +215,7 @@ app.get('/forum', async (request, result) => {
     }
 });
 
+// Receives forum posts
 app.post('/forum', async (request, result) => {
     console.log('POST /forum');
 
@@ -210,7 +229,7 @@ app.post('/forum', async (request, result) => {
             email: email || null,
             message,
             date: new Date(),
-            isHighlighted: false // always false until YOU highlight it
+            isHighlighted: false
         };
 
         const insertResult = await forumPosts.insertOne(newPost);
