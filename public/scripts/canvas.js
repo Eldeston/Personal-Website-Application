@@ -53,10 +53,11 @@ let sineTime = 0;
 
 let lastTime = performance.now();
 let deltaTime = 0;
+let currFrame = 0;
 
 // Particle Class
 class Particle {
-    constructor(positionX, positionY, velocityX, velocityY) {
+    constructor(positionX = -1, positionY = -1, velocityX = 1, velocityY = 0) {
         // Upon construction of variable, store variables to this class
         this.positionX = positionX;
         this.positionY = positionY;
@@ -99,17 +100,11 @@ class Particle {
 
 class MainCanvas {
     constructor() {
-        // Initialize particles
-        for (let i = 0; i < particles; i++)
-            particleList.push(new Particle(0, 0, -1, 0));
-
         // Bind main loop to this class
         this.mainLoop = this.mainLoop.bind(this);
 
         // Get particles element
         this.particlesElement = document.getElementById('particles');
-        // Set particles text
-        this.particlesElement.textContent = `${particles} particles`;
 
         // Get FPS element
         this.fpsElement = document.getElementById('fps');
@@ -137,6 +132,14 @@ class MainCanvas {
         // For changing noise over time
         noiseTime = lastTime * noiseSpeed;
 
+        // Delay every 2 frames
+        if (particleList.length < particles && currFrame % 2 == 0) {
+            // Create a particle every frame until it reaches a threshold
+            particleList.push(new Particle());
+            // Update particles text
+            this.particlesElement.textContent = `${particleList.length} particles`;
+        }
+
         // Transparent background fill
         ctx.fillStyle = mode ? "rgba(0, 0, 0, 0.03125)" : "rgba(255, 255, 255, 0.03125)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -161,6 +164,8 @@ class MainCanvas {
             // Main draw call
             this.mainDraw();
         }
+
+        currFrame++;
 
         // Request next frame
         requestAnimationFrame(this.mainLoop);
